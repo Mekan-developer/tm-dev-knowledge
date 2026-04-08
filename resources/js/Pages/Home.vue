@@ -23,7 +23,7 @@ const props = defineProps({
 });
 
 const search = ref(props.filters.q ?? '');
-const category = ref(props.filters.category ?? 'All');
+const guideCategoryId = ref(props.filters.guide_category_id ?? null);
 
 let searchTimer;
 
@@ -32,16 +32,16 @@ watch(search, () => {
     searchTimer = setTimeout(() => {
         router.get(
             route(props.listRouteName),
-            { q: search.value, category: category.value },
+            { q: search.value, guide_category_id: guideCategoryId.value },
             { preserveState: true, replace: true },
         );
     }, 300);
 });
 
-watch(category, () => {
+watch(guideCategoryId, () => {
     router.get(
         route(props.listRouteName),
-        { q: search.value, category: category.value },
+        { q: search.value, guide_category_id: guideCategoryId.value },
         { preserveState: true, replace: true },
     );
 });
@@ -60,7 +60,7 @@ watch(category, () => {
                 autocomplete="off"
             />
 
-            <CategoryFilter v-model="category" :categories="categories" />
+            <CategoryFilter v-model="guideCategoryId" :categories="categories" />
 
             <div
                 v-if="guides.data?.length"

@@ -2,6 +2,7 @@
 import AdminLayout from '@/Components/AdminLayout.vue';
 import PublicLayout from '@/Components/PublicLayout.vue';
 import TagInput from '@/Components/TagInput.vue';
+import { useCategoryColor } from '@/composables/useCategoryColor';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { computed, watch } from 'vue';
 
@@ -28,6 +29,7 @@ const props = defineProps({
 });
 
 const isEdit = computed(() => props.guide !== null);
+const { badgeClass } = useCategoryColor();
 
 const isAdminForm = computed(() => props.formContext === 'admin');
 
@@ -38,7 +40,7 @@ const cancelHref = computed(() => {
 
 const form = useForm({
     title: props.guide?.title ?? '',
-    category: props.guide?.category ?? props.categories[0] ?? 'Docker',
+    guide_category_id: props.guide?.guide_category_id ?? props.categories[0]?.id ?? null,
     description: props.guide?.description ?? '',
     tags: props.guide?.tags ? [...props.guide.tags] : [],
     steps: typeof props.guide?.steps === 'string' ? props.guide.steps : '',
@@ -49,7 +51,7 @@ watch(
     (g) => {
         if (!g) return;
         form.title = g.title;
-        form.category = g.category;
+        form.guide_category_id = g.guide_category_id;
         form.description = g.description;
         form.tags = [...g.tags];
         form.steps = typeof g.steps === 'string' ? g.steps : '';
@@ -99,15 +101,26 @@ function submit() {
                 <div>
                     <label class="mb-1 block text-xs font-semibold text-gray-600">Category</label>
                     <select
-                        v-model="form.category"
+                        v-model="form.guide_category_id"
                         class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
-                        <option v-for="c in categories" :key="c" :value="c">
-                            {{ c === 'JS/TS' ? 'JS·TS' : c }}
+                        <option v-for="c in categories" :key="c.id" :value="c.id">
+                            {{ c.name === 'JS/TS' ? 'JS·TS' : c.name }}
                         </option>
                     </select>
-                    <p v-if="form.errors.category" class="mt-1 text-sm text-red-600">
-                        {{ form.errors.category }}
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span
+                            v-for="c in categories"
+                            :key="`admin-${c.id}`"
+                            class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px]"
+                            :class="badgeClass(c.color)"
+                        >
+                            <span class="h-1.5 w-1.5 rounded-full bg-current" />
+                            {{ c.name === 'JS/TS' ? 'JS·TS' : c.name }}
+                        </span>
+                    </div>
+                    <p v-if="form.errors.guide_category_id" class="mt-1 text-sm text-red-600">
+                        {{ form.errors.guide_category_id }}
                     </p>
                 </div>
 
@@ -183,15 +196,26 @@ function submit() {
                 <div>
                     <label class="mb-1 block text-xs font-semibold text-gray-600">Category</label>
                     <select
-                        v-model="form.category"
+                        v-model="form.guide_category_id"
                         class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
-                        <option v-for="c in categories" :key="c" :value="c">
-                            {{ c === 'JS/TS' ? 'JS·TS' : c }}
+                        <option v-for="c in categories" :key="c.id" :value="c.id">
+                            {{ c.name === 'JS/TS' ? 'JS·TS' : c.name }}
                         </option>
                     </select>
-                    <p v-if="form.errors.category" class="mt-1 text-sm text-red-600">
-                        {{ form.errors.category }}
+                    <div class="mt-2 flex flex-wrap gap-2">
+                        <span
+                            v-for="c in categories"
+                            :key="`public-${c.id}`"
+                            class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px]"
+                            :class="badgeClass(c.color)"
+                        >
+                            <span class="h-1.5 w-1.5 rounded-full bg-current" />
+                            {{ c.name === 'JS/TS' ? 'JS·TS' : c.name }}
+                        </span>
+                    </div>
+                    <p v-if="form.errors.guide_category_id" class="mt-1 text-sm text-red-600">
+                        {{ form.errors.guide_category_id }}
                     </p>
                 </div>
 

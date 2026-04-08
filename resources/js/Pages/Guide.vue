@@ -1,7 +1,7 @@
 <script setup>
 import PublicLayout from '@/Components/PublicLayout.vue';
 import StepList from '@/Components/StepList.vue';
-import { badgeClassForCategory } from '@/support/categoryStyles';
+import { useCategoryColor } from '@/composables/useCategoryColor';
 import { Head, Link, router, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
@@ -16,6 +16,7 @@ const props = defineProps({
 });
 
 const page = usePage();
+const { badgeClass } = useCategoryColor();
 
 /** Показывать блок управления на странице гайда. */
 const showActions = computed(() => props.guide.can_manage);
@@ -78,7 +79,7 @@ function formatDate(iso) {
                 <div class="flex flex-wrap items-center gap-2.5">
                     <span
                         class="rounded-md px-2.5 py-1 text-[11px] font-semibold"
-                        :class="badgeClassForCategory(guide.category)"
+                        :class="badgeClass(guide.category_color)"
                     >
                         {{ guide.category === 'JS/TS' ? 'JS·TS' : guide.category }}
                     </span>

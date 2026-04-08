@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\GuideCategory;
 use App\Http\Controllers\Controller;
+use App\Models\GuideCategory;
 use App\Services\GuideService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -23,19 +23,25 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request): Response
     {
-        $category = $request->string('category', 'All')->toString();
+        $guideCategoryId = $request->filled('guide_category_id')
+            ? (int) $request->input('guide_category_id')
+            : null;
         $q = $request->string('q')->toString();
 
         $guides = $this->guideService->listGuides(
-            ['q' => $q, 'category' => $category],
+            ['q' => $q, 'guide_category_id' => $guideCategoryId],
             $request->user(),
         );
 
         return Inertia::render('Admin/Dashboard', [
             'guides' => $guides,
-            'categories' => array_merge(['All'], GuideCategory::values()),
+            'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
+                'id' => $category->id,
+                'name' => $category->name,
+                'color' => $category->color,
+            ])->values(),
             'filters' => [
-                'category' => $category,
+                'guide_category_id' => $guideCategoryId,
                 'q' => $q,
             ],
         ]);

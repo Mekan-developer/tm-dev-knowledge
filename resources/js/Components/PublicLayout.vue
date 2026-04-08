@@ -1,4 +1,5 @@
 <script setup>
+import ContactButton from '@/Components/ContactButton.vue';
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
@@ -45,5 +46,6 @@ const isContributor = computed(() => page.props.auth?.user?.role === 'contributo
         <main>
             <slot />
         </main>
+        <ContactButton />
     </div>
 </template>

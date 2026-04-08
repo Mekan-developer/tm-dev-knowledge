@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\Guide;
 
-use App\Enums\GuideCategory;
 use App\Models\Guide;
 use App\Services\GuideService;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 /**
  * Валидация обновления гайда; авторизация через canEdit в сервисе.
@@ -35,7 +33,7 @@ class UpdateGuideRequest extends FormRequest
     {
         return [
             'title' => ['sometimes', 'required', 'string', 'max:255'],
-            'category' => ['sometimes', 'required', Rule::enum(GuideCategory::class)],
+            'guide_category_id' => ['sometimes', 'required', 'exists:guide_categories,id'],
             'description' => ['sometimes', 'required', 'string'],
             'tags' => ['sometimes', 'nullable', 'array'],
             'tags.*' => ['string', 'max:64'],

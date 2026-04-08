@@ -21,7 +21,7 @@ class GuideService
     /**
      * Список гайдов через репозиторий + маппинг для Inertia (карточки).
      *
-     * @param  array{q?: string, category?: string, user_id?: int|null, per_page?: int}  $filters
+     * @param  array{q?: string, guide_category_id?: int|null, user_id?: int|null, per_page?: int}  $filters
      */
     public function listGuides(array $filters, ?User $viewer): LengthAwarePaginator
     {
@@ -129,7 +129,9 @@ class GuideService
         return [
             'id' => $guide->id,
             'title' => $guide->title,
-            'category' => $guide->category->value,
+            'guide_category_id' => $guide->guide_category_id,
+            'category' => $guide->category?->name ?? 'Other',
+            'category_color' => $guide->category?->color ?? 'gray',
             'description' => $guide->description,
             'tags' => $guide->tags,
             'author_name' => $guide->author_name,
@@ -150,7 +152,9 @@ class GuideService
         return [
             'id' => $guide->id,
             'title' => $guide->title,
-            'category' => $guide->category->value,
+            'guide_category_id' => $guide->guide_category_id,
+            'category' => $guide->category?->name ?? 'Other',
+            'category_color' => $guide->category?->color ?? 'gray',
             'description' => $guide->description,
             'tags' => $guide->tags,
             'steps' => $guide->steps,
@@ -169,8 +173,8 @@ class GuideService
     {
         return [
             'user_id' => $user->id,
+            'guide_category_id' => (int) $validated['guide_category_id'],
             'title' => $validated['title'],
-            'category' => $validated['category'],
             'description' => $validated['description'],
             'tags' => $validated['tags'] ?? [],
             'steps' => $steps,
@@ -187,11 +191,9 @@ class GuideService
      */
     private function buildUpdatePayload(Guide $guide, array $validated, array $steps): array
     {
-        $category = $validated['category'] ?? $guide->category;
-
         return [
             'title' => $validated['title'] ?? $guide->title,
-            'category' => $category,
+            'guide_category_id' => (int) ($validated['guide_category_id'] ?? $guide->guide_category_id),
             'description' => $validated['description'] ?? $guide->description,
             'tags' => $validated['tags'] ?? $guide->tags,
             'steps' => $steps,

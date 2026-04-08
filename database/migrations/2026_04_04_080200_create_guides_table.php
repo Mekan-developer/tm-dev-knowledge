@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('guides', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('guide_category_id')->nullable()->constrained('guide_categories')->nullOnDelete();
             $table->string('title');
-            $table->enum('category', ['Docker', 'Git', 'Linux', 'Python', 'JS/TS', 'DevOps', 'Database', 'Other']);
             $table->text('description');
             $table->json('tags');
             $table->json('steps');

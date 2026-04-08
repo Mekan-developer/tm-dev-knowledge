@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\GuideCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Guide\StoreGuideRequest;
 use App\Http\Requests\Guide\UpdateGuideRequest;
 use App\Models\Guide;
+use App\Models\GuideCategory;
 use App\Services\GuideService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -28,7 +28,7 @@ class AdminGuideController extends Controller
     {
         return Inertia::render('GuideForm', [
             'guide' => null,
-            'categories' => GuideCategory::values(),
+            'categories' => GuideCategory::query()->orderBy('sort_order')->get(['id', 'name', 'color']),
             'formContext' => 'admin',
             'cancelTo' => ['name' => 'admin.dashboard'],
         ]);
@@ -53,12 +53,12 @@ class AdminGuideController extends Controller
             'guide' => [
                 'id' => $guide->id,
                 'title' => $guide->title,
-                'category' => $guide->category->value,
+                'guide_category_id' => $guide->guide_category_id,
                 'description' => $guide->description,
                 'tags' => $guide->tags,
                 'steps' => implode("\n", $guide->steps),
             ],
-            'categories' => GuideCategory::values(),
+            'categories' => GuideCategory::query()->orderBy('sort_order')->get(['id', 'name', 'color']),
             'formContext' => 'admin',
             'cancelTo' => ['name' => 'admin.dashboard'],
         ]);

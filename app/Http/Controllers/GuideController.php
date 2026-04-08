@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\GuideCategory;
 use App\Http\Requests\Guide\StoreGuideRequest;
 use App\Http\Requests\Guide\UpdateGuideRequest;
 use App\Models\Guide;
+use App\Models\GuideCategory;
 use App\Services\GuideService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,19 +26,25 @@ class GuideController extends Controller
      */
     public function index(Request $request): Response
     {
-        $category = $request->string('category', 'All')->toString();
+        $guideCategoryId = $request->filled('guide_category_id')
+            ? (int) $request->input('guide_category_id')
+            : null;
         $q = $request->string('q')->toString();
 
         $guides = $this->guideService->listGuides(
-            ['q' => $q, 'category' => $category],
+            ['q' => $q, 'guide_category_id' => $guideCategoryId],
             $request->user(),
         );
 
         return Inertia::render('Home', [
             'guides' => $guides,
-            'categories' => array_merge(['All'], GuideCategory::values()),
+            'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
+                'id' => $category->id,
+                'name' => $category->name,
+                'color' => $category->color,
+            ])->values(),
             'filters' => [
-                'category' => $category,
+                'guide_category_id' => $guideCategoryId,
                 'q' => $q,
             ],
             'pageTitle' => 'Guides',
@@ -51,13 +57,15 @@ class GuideController extends Controller
      */
     public function myGuides(Request $request): Response
     {
-        $category = $request->string('category', 'All')->toString();
+        $guideCategoryId = $request->filled('guide_category_id')
+            ? (int) $request->input('guide_category_id')
+            : null;
         $q = $request->string('q')->toString();
 
         $guides = $this->guideService->listGuides(
             [
                 'q' => $q,
-                'category' => $category,
+                'guide_category_id' => $guideCategoryId,
                 'user_id' => (int) $request->user()->id,
             ],
             $request->user(),
@@ -65,9 +73,13 @@ class GuideController extends Controller
 
         return Inertia::render('Home', [
             'guides' => $guides,
-            'categories' => array_merge(['All'], GuideCategory::values()),
+            'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
+                'id' => $category->id,
+                'name' => $category->name,
+                'color' => $category->color,
+            ])->values(),
             'filters' => [
-                'category' => $category,
+                'guide_category_id' => $guideCategoryId,
                 'q' => $q,
             ],
             'pageTitle' => 'My guides',
@@ -94,7 +106,7 @@ class GuideController extends Controller
 
         return Inertia::render('GuideForm', [
             'guide' => null,
-            'categories' => GuideCategory::values(),
+            'categories' => GuideCategory::query()->orderBy('sort_order')->get(['id', 'name', 'color']),
             'formContext' => 'contributor',
             'cancelTo' => ['name' => 'home'],
         ]);
@@ -121,12 +133,12 @@ class GuideController extends Controller
             'guide' => [
                 'id' => $guide->id,
                 'title' => $guide->title,
-                'category' => $guide->category->value,
+                'guide_category_id' => $guide->guide_category_id,
                 'description' => $guide->description,
                 'tags' => $guide->tags,
                 'steps' => implode("\n", $guide->steps),
             ],
-            'categories' => GuideCategory::values(),
+            'categories' => GuideCategory::query()->orderBy('sort_order')->get(['id', 'name', 'color']),
             'formContext' => 'contributor',
             'cancelTo' => [
                 'name' => 'guides.show',

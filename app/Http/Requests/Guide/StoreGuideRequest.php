@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\Guide;
 
-use App\Enums\GuideCategory;
 use App\Models\Guide;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Validation\Rule;
 
 /**
  * Валидация создания гайда (контрибьютор и админ).
@@ -30,7 +28,7 @@ class StoreGuideRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'category' => ['required', Rule::enum(GuideCategory::class)],
+            'guide_category_id' => ['required', 'exists:guide_categories,id'],
             'description' => ['required', 'string'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['string', 'max:64'],

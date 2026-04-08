@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\GuideRepositoryInterface;
+use App\Repositories\Contracts\GuideCategoryRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use App\Repositories\GuideCategoryRepository;
 use App\Repositories\GuideRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Vite;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(GuideRepositoryInterface::class, GuideRepository::class);
+        $this->app->bind(GuideCategoryRepositoryInterface::class, GuideCategoryRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 

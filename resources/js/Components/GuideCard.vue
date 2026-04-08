@@ -1,7 +1,7 @@
 <script setup>
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
-import { badgeClassForCategory } from '../support/categoryStyles';
+import { useCategoryColor } from '@/composables/useCategoryColor';
 
 /**
  * Карточка гайда: действия Edit/Delete для админ-режима или при can_manage на публичной части.
@@ -19,6 +19,7 @@ const props = defineProps({
 });
 
 const page = usePage();
+const { badgeClass } = useCategoryColor();
 
 const showActions = computed(() => props.adminMode || props.guide.can_manage);
 
@@ -59,7 +60,7 @@ function destroyGuide() {
             </Link>
             <span
                 class="shrink-0 rounded-md px-2 py-0.5 text-[10px] font-semibold"
-                :class="badgeClassForCategory(guide.category)"
+                :class="badgeClass(guide.category_color)"
             >
                 {{ guide.category === 'JS/TS' ? 'JS·TS' : guide.category }}
             </span>

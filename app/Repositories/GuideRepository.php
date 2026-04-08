@@ -20,11 +20,12 @@ class GuideRepository implements GuideRepositoryInterface
     public function getAll(array $filters): LengthAwarePaginator
     {
         $q = (string) ($filters['q'] ?? '');
-        $category = (string) ($filters['category'] ?? 'All');
+        $guideCategoryId = isset($filters['guide_category_id']) ? (int) $filters['guide_category_id'] : null;
         $userId = $filters['user_id'] ?? null;
         $perPage = (int) ($filters['per_page'] ?? 12);
 
-        return $this->baseFilteredQuery($q, $category, $userId)
+        return $this->baseFilteredQuery($q, $guideCategoryId, $userId)
+            ->with('category')
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -35,7 +36,7 @@ class GuideRepository implements GuideRepositoryInterface
      */
     public function getById(string $id): Guide
     {
-        return Guide::query()->findOrFail($id);
+        return Guide::query()->with('category')->findOrFail($id);
     }
 
     /**
@@ -44,6 +45,7 @@ class GuideRepository implements GuideRepositoryInterface
     public function getByUser(User $user): Collection
     {
         return Guide::query()
+            ->with('category')
             ->where('user_id', $user->id)
             ->orderByDesc('created_at')
             ->get();
@@ -78,11 +80,11 @@ class GuideRepository implements GuideRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function search(string $query, ?string $category): LengthAwarePaginator
+    public function search(string $query, ?int $guideCategoryId): LengthAwarePaginator
     {
         return $this->getAll([
             'q' => $query,
-            'category' => $category ?? 'All',
+            'guide_category_id' => $guideCategoryId,
             'per_page' => 12,
         ]);
     }
@@ -101,13 +103,13 @@ class GuideRepository implements GuideRepositoryInterface
     /**
      * Общий запрос фильтрации для списков и поиска.
      */
-    private function baseFilteredQuery(string $q, string $category, mixed $userId): Builder
+    private function baseFilteredQuery(string $q, ?int $guideCategoryId, mixed $userId): Builder
     {
         return Guide::query()
             ->when($userId !== null && $userId !== '', function (Builder $query) use ($userId) {
                 $query->where('user_id', (int) $userId);
             })
-            ->when($category !== '' && $category !== 'All', fn (Builder $query) => $query->where('category', $category))
+            ->when($guideCategoryId !== null, fn (Builder $query) => $query->where('guide_category_id', $guideCategoryId))
             ->when($q !== '', function (Builder $query) use ($q) {
                 $query->where(function (Builder $inner) use ($q) {
                     $inner->where('title', 'like', '%'.$q.'%')

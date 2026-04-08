@@ -13,7 +13,7 @@ use Illuminate\Support\Collection;
 interface GuideRepositoryInterface
 {
     /**
-     * Пагинированный список с фильтрами: q, category, user_id?, per_page.
+     * Пагинированный список с фильтрами: q, guide_category_id, user_id?, per_page.
      */
     public function getAll(array $filters): LengthAwarePaginator;
 
@@ -45,7 +45,7 @@ interface GuideRepositoryInterface
     /**
      * Поиск по тексту и опциональной категории (пагинация 12).
      */
-    public function search(string $query, ?string $category): LengthAwarePaginator;
+    public function search(string $query, ?int $guideCategoryId): LengthAwarePaginator;
 
     /**
      * Отвязать гайды автора при удалении контрибьютора (author_name = Deleted user).
