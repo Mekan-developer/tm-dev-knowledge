@@ -20,7 +20,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           extensions: mbstring,pdo,pdo_mysql,bcmath,ctype,json,tokenizer,xml,curl,gd
           tools: composer:v2
 
@@ -32,7 +32,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
       - name: Run tests
         run: php artisan test --no-coverage
@@ -57,12 +57,8 @@ jobs:
             git reset --hard origin/${{ github.ref_name }}
 
             # Установить зависимости
-            composer install --no-interaction --prefer-dist --optimize-autoloader
+            composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
-            # Копировать .env файл если его нет
-            if [ ! -f .env ]; then
-              cp .env.example .env
-            fi
 
             # Обновить базу данных
             php artisan migrate --force
@@ -86,6 +82,14 @@ jobs:
             sudo systemctl restart php-fpm || true
 
             echo "✅ Deployment успешно завершен!"
+
+      - name: Install Node.js and build frontend
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - run: |
+          npm install
+          npm run build
 
       - name: Notify on success
         if: success()
