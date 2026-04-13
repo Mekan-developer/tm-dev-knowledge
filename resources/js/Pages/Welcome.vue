@@ -14,9 +14,11 @@ defineProps({
 
 <template>
     <Head title="Hoş geldiňiz" />
-    <div class="flex min-h-dvh flex-col items-center justify-center bg-gray-50 px-6 py-12 text-gray-900">
-        <h1 class="text-2xl font-bold">DevKnowledge</h1>
-        <p class="mt-3 max-w-md text-center text-sm text-gray-600">
+    <div
+        class="flex min-h-dvh flex-col items-center justify-center bg-gray-50 px-6 py-12 text-gray-900 dark:bg-gray-950 dark:text-gray-100"
+    >
+        <h1 class="text-2xl font-bold dark:text-white">DevKnowledge</h1>
+        <p class="mt-3 max-w-md text-center text-sm text-gray-600 dark:text-gray-300">
             Öwreniş we işläp düzüjilik boýunça gysgaça gollanmalar ýygymy.
         </p>
         <Link
@@ -25,7 +27,7 @@ defineProps({
         >
             Gollanmalar
         </Link>
-        <p v-if="canLogin" class="mt-8 text-xs text-gray-400">
+        <p v-if="canLogin" class="mt-8 text-xs text-gray-400 dark:text-gray-500">
             Laravel {{ laravelVersion }} · PHP {{ phpVersion }}
         </p>
     </div>

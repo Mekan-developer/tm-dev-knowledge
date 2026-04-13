@@ -82,16 +82,16 @@ function submit() {
 
         <div class="mx-auto max-w-6xl px-4 py-6 md:px-8">
             <form class="mx-auto max-w-2xl space-y-4" @submit.prevent="submit">
-                <h1 class="text-xl font-bold text-gray-900">
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white">
                     {{ isEdit ? 'Gollanmany üýtgetmek' : 'Täze gollanma' }}
                 </h1>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Ady</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Ady</label>
                     <input
                         v-model="form.title"
                         type="text"
-                        class="w-full rounded-lg border border-gray-300 px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     />
                     <p v-if="form.errors.title" class="mt-1 text-sm text-red-600">
                         {{ form.errors.title }}
@@ -99,10 +99,10 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Kategoriýa</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Kategoriýa</label>
                     <select
                         v-model="form.guide_category_id"
-                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     >
                         <option v-for="c in categories" :key="c.id" :value="c.id">
                             {{ c.name === 'JS/TS' ? 'JS·TS' : c.name }}
@@ -125,11 +125,11 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Düşündiriş</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Düşündiriş</label>
                     <textarea
                         v-model="form.description"
                         rows="3"
-                        class="w-full rounded-lg border border-gray-300 px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     />
                     <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">
                         {{ form.errors.description }}
@@ -137,16 +137,16 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Bellikler</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Bellikler</label>
                     <TagInput v-model="form.tags" />
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Ädimler (her setirde bir ädim)</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Ädimler (her setirde bir ädim)</label>
                     <textarea
                         v-model="form.steps"
                         rows="8"
-                        class="w-full rounded-lg border border-gray-300 px-3.5 py-3 font-mono text-[13px] focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 font-mono text-[13px] text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     />
                     <p v-if="form.errors.steps" class="mt-1 text-sm text-red-600">
                         {{ form.errors.steps }}
@@ -156,7 +156,7 @@ function submit() {
                 <div class="flex flex-wrap justify-end gap-3 pt-2">
                     <Link
                         :href="cancelHref"
-                        class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+                        class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
                     >
                         Ýatyr
                     </Link>
@@ -177,16 +177,16 @@ function submit() {
 
         <div class="mx-auto max-w-6xl px-4 py-6 md:px-8">
             <form class="mx-auto max-w-2xl space-y-4" @submit.prevent="submit">
-                <h1 class="text-xl font-bold text-gray-900">
+                <h1 class="text-xl font-bold text-gray-900 dark:text-white">
                     {{ isEdit ? 'Gollanmany üýtgetmek' : 'Täze gollanma' }}
                 </h1>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Ady</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Ady</label>
                     <input
                         v-model="form.title"
                         type="text"
-                        class="w-full rounded-lg border border-gray-300 px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     />
                     <p v-if="form.errors.title" class="mt-1 text-sm text-red-600">
                         {{ form.errors.title }}
@@ -194,10 +194,10 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Kategoriýa</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Kategoriýa</label>
                     <select
                         v-model="form.guide_category_id"
-                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     >
                         <option v-for="c in categories" :key="c.id" :value="c.id">
                             {{ c.name === 'JS/TS' ? 'JS·TS' : c.name }}
@@ -220,11 +220,11 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Düşündiriş</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Düşündiriş</label>
                     <textarea
                         v-model="form.description"
                         rows="3"
-                        class="w-full rounded-lg border border-gray-300 px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     />
                     <p v-if="form.errors.description" class="mt-1 text-sm text-red-600">
                         {{ form.errors.description }}
@@ -232,16 +232,16 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Bellikler</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Bellikler</label>
                     <TagInput v-model="form.tags" />
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Ädimler (her setirde bir ädim)</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600 dark:text-gray-300">Ädimler (her setirde bir ädim)</label>
                     <textarea
                         v-model="form.steps"
                         rows="8"
-                        class="w-full rounded-lg border border-gray-300 px-3.5 py-3 font-mono text-[13px] focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                        class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 font-mono text-[13px] text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     />
                     <p v-if="form.errors.steps" class="mt-1 text-sm text-red-600">
                         {{ form.errors.steps }}
@@ -251,7 +251,7 @@ function submit() {
                 <div class="flex flex-wrap justify-end gap-3 pt-2">
                     <Link
                         :href="cancelHref"
-                        class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50"
+                        class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
                     >
                         Ýatyr
                     </Link>

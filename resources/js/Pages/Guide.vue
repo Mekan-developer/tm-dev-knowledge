@@ -64,7 +64,7 @@ function formatDate(iso) {
             <div class="mb-4">
                 <Link
                     :href="route('home')"
-                    class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900"
+                    class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                 >
                     <span class="text-lg leading-none" aria-hidden="true">←</span>
                     Yzyna
@@ -72,7 +72,7 @@ function formatDate(iso) {
             </div>
 
             <div class="space-y-4">
-                <h1 class="text-3xl font-bold leading-tight text-gray-900">
+                <h1 class="text-3xl font-bold leading-tight text-gray-900 dark:text-white">
                     {{ guide.title }}
                 </h1>
 
@@ -86,33 +86,33 @@ function formatDate(iso) {
                     <span
                         v-for="tag in guide.tags"
                         :key="tag"
-                        class="rounded bg-gray-100 px-2 py-0.5 text-[11px] text-gray-600"
+                        class="rounded bg-gray-100 px-2 py-0.5 text-[11px] text-gray-600 dark:bg-gray-800 dark:text-gray-300"
                     >
                         {{ tag }}
                     </span>
                 </div>
 
-                <p class="text-sm text-gray-500">
+                <p class="text-sm text-gray-500 dark:text-gray-400">
                     {{ guide.author_name }} tarapyndan · {{ formatDate(guide.updated_at) }}
                 </p>
 
                 <div v-if="showActions" class="flex flex-wrap gap-3">
                     <Link
                         :href="editHref"
-                        class="text-sm font-semibold text-blue-600 hover:text-blue-800"
+                        class="text-sm font-semibold text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                     >
                         Üýtget
                     </Link>
                     <button
                         type="button"
-                        class="text-sm font-semibold text-red-600 hover:text-red-800"
+                        class="text-sm font-semibold text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
                         @click="destroyGuide"
                     >
                         Poz
                     </button>
                 </div>
 
-                <p class="max-w-3xl text-[15px] leading-relaxed text-gray-600">
+                <p class="max-w-3xl text-[15px] leading-relaxed text-gray-600 dark:text-gray-300">
                     {{ guide.description }}
                 </p>
 

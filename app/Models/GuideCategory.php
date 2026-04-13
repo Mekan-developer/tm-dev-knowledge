@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class GuideCategory extends Model
@@ -37,16 +36,5 @@ class GuideCategory extends Model
     public function guides(): HasMany
     {
         return $this->hasMany(Guide::class);
-    }
-
-    /**
-     * Категории для селектов, отсортированные по порядку.
-     */
-    public static function forSelect(): Collection
-    {
-        return static::query()
-            ->orderBy('sort_order')
-            ->orderBy('name')
-            ->get();
     }
 }

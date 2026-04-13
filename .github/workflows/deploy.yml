@@ -44,9 +44,11 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
+            set -e
             cd ${{ secrets.PROJECT_PATH }}
 
             # 1. Синхронизация кода
+            git clean -fd
             git fetch origin
             git reset --hard origin/main
 
@@ -77,3 +79,4 @@ jobs:
       - name: Notify on failure
         if: failure()
         run: echo "❌ Развертывание не удалось. Проверьте логи."
+

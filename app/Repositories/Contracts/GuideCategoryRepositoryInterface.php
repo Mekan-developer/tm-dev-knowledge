@@ -16,6 +16,16 @@ interface GuideCategoryRepositoryInterface
     public function getAll(): Collection;
 
     /**
+     * Категории для селектов (кэш 1 час).
+     */
+    public function getForSelect(): Collection;
+
+    /**
+     * Сбросить кэш списка категорий для селектов.
+     */
+    public function forgetCategoriesForSelectCache(): void;
+
+    /**
      * Найти категорию по id.
      */
     public function getById(int $id): GuideCategory;

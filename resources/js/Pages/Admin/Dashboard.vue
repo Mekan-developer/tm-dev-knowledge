@@ -47,7 +47,7 @@ watch(guideCategoryId, () => {
             <input
                 v-model="search"
                 type="search"
-                class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                 placeholder="Mowzuk ýa-da tehnologiýa boýunça gözleg…"
                 autocomplete="off"
             />
@@ -68,9 +68,9 @@ watch(guideCategoryId, () => {
 
             <div
                 v-else
-                class="flex flex-col items-center rounded-xl border border-dashed border-gray-200 bg-white px-6 py-14 text-center"
+                class="flex flex-col items-center rounded-xl border border-dashed border-gray-200 bg-white px-6 py-14 text-center dark:border-gray-700 dark:bg-gray-900"
             >
-                <p class="text-gray-600">Süzgüçleriňize laýyk gollanma ýok.</p>
+                <p class="text-gray-600 dark:text-gray-300">Süzgüçleriňize laýyk gollanma ýok.</p>
                 <Link
                     :href="route('admin.guides.create')"
                     class="mt-4 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
@@ -91,14 +91,14 @@ watch(guideCategoryId, () => {
                         :class="
                             link.active
                                 ? 'bg-blue-600 font-semibold text-white'
-                                : 'bg-white text-gray-700 ring-1 ring-gray-200 hover:bg-gray-50'
+                                : 'bg-white text-gray-700 ring-1 ring-gray-200 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:ring-gray-600 dark:hover:bg-gray-700'
                         "
                         preserve-state
                         v-html="link.label"
                     />
                     <span
                         v-else
-                        class="min-w-9 cursor-default rounded-md px-3 py-1.5 text-sm text-gray-400"
+                        class="min-w-9 cursor-default rounded-md px-3 py-1.5 text-sm text-gray-400 dark:text-gray-500"
                         v-html="link.label"
                     />
                 </template>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\GuideCategory;
 use App\Services\GuideService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -35,11 +34,7 @@ class DashboardController extends Controller
 
         return Inertia::render('Admin/Dashboard', [
             'guides' => $this->guideService->paginatorForInertia($guides),
-            'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
-                'id' => $category->id,
-                'name' => $category->name,
-                'color' => $category->color,
-            ])->values(),
+            'categories' => $this->guideService->getCategoriesForSelect(),
             'filters' => [
                 'guide_category_id' => $guideCategoryId,
                 'q' => $q,

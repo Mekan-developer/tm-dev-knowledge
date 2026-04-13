@@ -36,10 +36,10 @@ class GuidePolicy
     }
 
     /**
-     * Удаление по тем же правилам, что и обновление.
+     * Удаление: админ или владелец гайда.
      */
     public function delete(User $user, Guide $guide): bool
     {
-        return $this->update($user, $guide);
+        return $user->isAdmin() || ($guide->user_id !== null && (int) $guide->user_id === (int) $user->id);
     }
 }

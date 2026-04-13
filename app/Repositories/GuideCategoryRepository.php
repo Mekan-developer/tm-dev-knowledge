@@ -5,12 +5,15 @@ namespace App\Repositories;
 use App\Models\GuideCategory;
 use App\Repositories\Contracts\GuideCategoryRepositoryInterface;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Реализация запросов к таблице guide_categories.
  */
 class GuideCategoryRepository implements GuideCategoryRepositoryInterface
 {
+    private const CACHE_KEY = 'categories_for_select';
+
     /**
      * {@inheritdoc}
      */
@@ -21,6 +24,25 @@ class GuideCategoryRepository implements GuideCategoryRepositoryInterface
             ->orderBy('sort_order')
             ->orderBy('name')
             ->get();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getForSelect(): Collection
+    {
+        return Cache::remember(self::CACHE_KEY, now()->addHour(), fn () => GuideCategory::query()
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->get(['id', 'name', 'color', 'slug']));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function forgetCategoriesForSelectCache(): void
+    {
+        Cache::forget(self::CACHE_KEY);
     }
 
     /**

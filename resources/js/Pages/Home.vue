@@ -55,7 +55,7 @@ watch(guideCategoryId, () => {
             <input
                 v-model="search"
                 type="search"
-                class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm text-gray-900 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500"
                 placeholder="Mowzuk ýa-da tehnologiýa boýunça gözleg…"
                 autocomplete="off"
             />
@@ -71,16 +71,16 @@ watch(guideCategoryId, () => {
 
             <div
                 v-else
-                class="flex flex-col items-center rounded-xl border border-dashed border-gray-200 bg-white px-6 py-14 text-center"
+                class="flex flex-col items-center rounded-xl border border-dashed border-gray-200 bg-white px-6 py-14 text-center dark:border-gray-700 dark:bg-gray-900"
             >
                 <div
-                    class="mb-4 flex h-28 w-28 items-center justify-center rounded-2xl bg-indigo-50 text-4xl"
+                    class="mb-4 flex h-28 w-28 items-center justify-center rounded-2xl bg-indigo-50 text-4xl dark:bg-indigo-950/50"
                     aria-hidden="true"
                 >
                     📚
                 </div>
-                <h2 class="text-lg font-bold text-gray-900">Häzirlikçä gollanma ýok</h2>
-                <p class="mt-1 max-w-sm text-sm text-gray-500">
+                <h2 class="text-lg font-bold text-gray-900 dark:text-white">Häzirlikçä gollanma ýok</h2>
+                <p class="mt-1 max-w-sm text-sm text-gray-500 dark:text-gray-400">
                     Ulanylýan buýurmalary we gysgaça ýazgylary ýatda saklaň.
                 </p>
             </div>
@@ -97,14 +97,14 @@ watch(guideCategoryId, () => {
                         :class="
                             link.active
                                 ? 'bg-blue-600 font-semibold text-white'
-                                : 'bg-white text-gray-700 ring-1 ring-gray-200 hover:bg-gray-50'
+                                : 'bg-white text-gray-700 ring-1 ring-gray-200 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:ring-gray-600 dark:hover:bg-gray-700'
                         "
                         preserve-state
                         v-html="link.label"
                     />
                     <span
                         v-else
-                        class="min-w-9 cursor-default rounded-md px-3 py-1.5 text-sm text-gray-400"
+                        class="min-w-9 cursor-default rounded-md px-3 py-1.5 text-sm text-gray-400 dark:text-gray-500"
                         v-html="link.label"
                     />
                 </template>

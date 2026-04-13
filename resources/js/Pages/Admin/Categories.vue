@@ -85,16 +85,16 @@ function moveCategory(categoryId, direction) {
         <Head title="Administrator — Kategoriýalar" />
 
         <div class="mx-auto max-w-6xl space-y-6 px-4 py-6 md:px-8">
-            <section class="rounded-xl border border-gray-200 bg-white p-4">
-                <h1 class="text-lg font-bold text-gray-900">Gollanma kategoriýalary</h1>
-                <p class="mt-1 text-sm text-gray-500">Täze kategoriýa goşuň we reňkini saýlaň.</p>
+            <section class="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-900">
+                <h1 class="text-lg font-bold text-gray-900 dark:text-white">Gollanma kategoriýalary</h1>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Täze kategoriýa goşuň we reňkini saýlaň.</p>
 
                 <form class="mt-4 grid gap-3 md:grid-cols-4" @submit.prevent="submitCreate">
                     <input
                         v-model="createForm.name"
                         type="text"
                         placeholder="Mysal: Laravel"
-                        class="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+                        class="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
                     />
 
                     <div class="md:col-span-2 flex flex-wrap gap-2">
@@ -114,9 +114,9 @@ function moveCategory(categoryId, direction) {
                 </form>
             </section>
 
-            <section class="overflow-x-auto rounded-xl border border-gray-200 bg-white">
+            <section class="overflow-x-auto rounded-xl border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
                 <table class="min-w-full text-left text-sm">
-                    <thead class="bg-gray-50 text-xs uppercase text-gray-500">
+                    <thead class="bg-gray-50 text-xs uppercase text-gray-500 dark:bg-gray-800/80 dark:text-gray-400">
                         <tr>
                             <th class="px-3 py-2">Badj</th>
                             <th class="px-3 py-2">At</th>
@@ -128,7 +128,11 @@ function moveCategory(categoryId, direction) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(category, index) in sortedCategories" :key="category.id" class="border-t border-gray-100">
+                        <tr
+                            v-for="(category, index) in sortedCategories"
+                            :key="category.id"
+                            class="border-t border-gray-100 dark:border-gray-700 dark:hover:bg-gray-800/50"
+                        >
                             <td class="px-3 py-2">
                                 <span class="rounded-full px-2 py-0.5 text-xs" :class="badgeClass(category.color)">
                                     {{ category.name }}
@@ -136,11 +140,14 @@ function moveCategory(categoryId, direction) {
                             </td>
                             <td class="px-3 py-2">
                                 <template v-if="editId === category.id">
-                                    <input v-model="editForm.name" class="w-full rounded border border-gray-300 px-2 py-1" />
+                                    <input
+                                        v-model="editForm.name"
+                                        class="w-full rounded border border-gray-300 bg-white px-2 py-1 text-gray-900 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
+                                    />
                                 </template>
                                 <template v-else>{{ category.name }}</template>
                             </td>
-                            <td class="px-3 py-2 text-gray-500">{{ category.slug }}</td>
+                            <td class="px-3 py-2 text-gray-500 dark:text-gray-400">{{ category.slug }}</td>
                             <td class="px-3 py-2">
                                 <template v-if="editId === category.id">
                                     <div class="flex flex-wrap gap-1">
@@ -158,10 +165,17 @@ function moveCategory(categoryId, direction) {
                             <td class="px-3 py-2">{{ category.guides_count }}</td>
                             <td class="px-3 py-2">
                                 <div class="flex items-center gap-1">
-                                    <button type="button" class="rounded border px-2 py-1" :disabled="index === 0" @click="moveCategory(category.id, -1)">↑</button>
                                     <button
                                         type="button"
-                                        class="rounded border px-2 py-1"
+                                        class="rounded border border-gray-300 px-2 py-1 dark:border-gray-600 dark:hover:bg-gray-800"
+                                        :disabled="index === 0"
+                                        @click="moveCategory(category.id, -1)"
+                                    >
+                                        ↑
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="rounded border border-gray-300 px-2 py-1 dark:border-gray-600 dark:hover:bg-gray-800"
                                         :disabled="index === sortedCategories.length - 1"
                                         @click="moveCategory(category.id, 1)"
                                     >
@@ -172,14 +186,18 @@ function moveCategory(categoryId, direction) {
                             <td class="px-3 py-2">
                                 <div class="flex items-center gap-2">
                                     <template v-if="editId === category.id">
-                                        <button type="button" class="text-blue-600" @click="saveEdit(category.id)">Ýatla</button>
-                                        <button type="button" class="text-gray-600" @click="cancelEdit">Ýatyr</button>
+                                        <button type="button" class="text-blue-600 dark:text-blue-400" @click="saveEdit(category.id)">
+                                            Ýatla
+                                        </button>
+                                        <button type="button" class="text-gray-600 dark:text-gray-300" @click="cancelEdit">Ýatyr</button>
                                     </template>
                                     <template v-else>
-                                        <button type="button" class="text-blue-600" @click="startEdit(category)">Üýtget</button>
+                                        <button type="button" class="text-blue-600 dark:text-blue-400" @click="startEdit(category)">
+                                            Üýtget
+                                        </button>
                                         <button
                                             type="button"
-                                            class="text-red-600 disabled:cursor-not-allowed disabled:text-gray-300"
+                                            class="text-red-600 disabled:cursor-not-allowed disabled:text-gray-300 dark:text-red-400 dark:disabled:text-gray-600"
                                             :disabled="category.guides_count > 0"
                                             :title="category.guides_count > 0 ? 'Gollanmalary bar kategoriýany pozup bolanok' : 'Kategoriýany poz'"
                                             @click="destroyCategory(category)"

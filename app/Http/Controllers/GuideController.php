@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Guide\StoreGuideRequest;
 use App\Http\Requests\Guide\UpdateGuideRequest;
 use App\Models\Guide;
-use App\Models\GuideCategory;
 use App\Services\GuideService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,30 +25,7 @@ class GuideController extends Controller
      */
     public function index(Request $request): Response
     {
-        $guideCategoryId = $request->filled('guide_category_id')
-            ? (int) $request->input('guide_category_id')
-            : null;
-        $q = $request->string('q')->toString();
-
-        $guides = $this->guideService->listGuides(
-            ['q' => $q, 'guide_category_id' => $guideCategoryId],
-            $request->user(),
-        );
-
-        return Inertia::render('Home', [
-            'guides' => $this->guideService->paginatorForInertia($guides),
-            'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
-                'id' => $category->id,
-                'name' => $category->name,
-                'color' => $category->color,
-            ])->values(),
-            'filters' => [
-                'guide_category_id' => $guideCategoryId,
-                'q' => $q,
-            ],
-            'pageTitle' => 'Gollanmalar',
-            'listRouteName' => 'home',
-        ]);
+        return $this->buildGuideListResponse($request, [], 'Gollanmalar', 'home');
     }
 
     /**
@@ -57,33 +33,41 @@ class GuideController extends Controller
      */
     public function myGuides(Request $request): Response
     {
-        $guideCategoryId = $request->filled('guide_category_id')
-            ? (int) $request->input('guide_category_id')
-            : null;
-        $q = $request->string('q')->toString();
-
-        $guides = $this->guideService->listGuides(
-            [
-                'q' => $q,
-                'guide_category_id' => $guideCategoryId,
-                'user_id' => (int) $request->user()->id,
-            ],
-            $request->user(),
+        return $this->buildGuideListResponse(
+            $request,
+            ['user_id' => (int) $request->user()->id],
+            'Mening gollanmalarym',
+            'my-guides',
         );
+    }
+
+    /**
+     * Общая логика списка гайдов для главной и «Мои гайды».
+     *
+     * @param  array<string, mixed>  $extraFilters
+     */
+    private function buildGuideListResponse(
+        Request $request,
+        array $extraFilters,
+        string $pageTitle,
+        string $listRouteName,
+    ): Response {
+        $filters = [
+            'q' => $request->string('q')->toString(),
+            'guide_category_id' => $request->filled('guide_category_id')
+                ? (int) $request->input('guide_category_id')
+                : null,
+            ...$extraFilters,
+        ];
+
+        $guides = $this->guideService->listGuides($filters, $request->user());
 
         return Inertia::render('Home', [
             'guides' => $this->guideService->paginatorForInertia($guides),
-            'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
-                'id' => $category->id,
-                'name' => $category->name,
-                'color' => $category->color,
-            ])->values(),
-            'filters' => [
-                'guide_category_id' => $guideCategoryId,
-                'q' => $q,
-            ],
-            'pageTitle' => 'Mening gollanmalarym',
-            'listRouteName' => 'my-guides',
+            'categories' => $this->guideService->getCategoriesForSelect(),
+            'filters' => $filters,
+            'pageTitle' => $pageTitle,
+            'listRouteName' => $listRouteName,
         ]);
     }
 
@@ -106,7 +90,7 @@ class GuideController extends Controller
 
         return Inertia::render('GuideForm', [
             'guide' => null,
-            'categories' => GuideCategory::query()->orderBy('sort_order')->get(['id', 'name', 'color']),
+            'categories' => $this->guideService->getCategoriesForSelect(),
             'formContext' => 'contributor',
             'cancelTo' => ['name' => 'home'],
         ]);
@@ -138,7 +122,7 @@ class GuideController extends Controller
                 'tags' => $guide->tags,
                 'steps' => implode("\n", $guide->steps),
             ],
-            'categories' => GuideCategory::query()->orderBy('sort_order')->get(['id', 'name', 'color']),
+            'categories' => $this->guideService->getCategoriesForSelect(),
             'formContext' => 'contributor',
             'cancelTo' => [
                 'name' => 'guides.show',
@@ -160,9 +144,9 @@ class GuideController extends Controller
     /**
      * Удаление гайда.
      */
-    public function destroy(Request $request, Guide $guide): RedirectResponse
+    public function destroy(Guide $guide): RedirectResponse
     {
-        abort_unless($this->guideService->canEdit($request->user(), $guide), 403);
+        $this->authorize('delete', $guide);
 
         $this->guideService->deleteGuide($guide);
 

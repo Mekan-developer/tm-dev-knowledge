@@ -29,7 +29,7 @@ const { badgeClass } = useCategoryColor();
                 :class="
                     modelValue === null
                         ? 'bg-blue-600 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        : 'border border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:border-gray-500 dark:hover:bg-gray-700'
                 "
                 @click="emit('update:modelValue', null)"
             >

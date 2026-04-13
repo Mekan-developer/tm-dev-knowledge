@@ -4,9 +4,12 @@ namespace App\Services;
 
 use App\Enums\UserRole;
 use App\Models\Guide;
+use App\Models\GuideCategory;
 use App\Models\User;
+use App\Repositories\Contracts\GuideCategoryRepositoryInterface;
 use App\Repositories\Contracts\GuideRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Lang;
 
@@ -17,7 +20,22 @@ class GuideService
 {
     public function __construct(
         private GuideRepositoryInterface $guideRepository,
+        private GuideCategoryRepositoryInterface $guideCategoryRepository,
     ) {}
+
+    /**
+     * Категории для фильтров и форм (id, name, color).
+     */
+    public function getCategoriesForSelect(): Collection
+    {
+        return $this->guideCategoryRepository->getForSelect()
+            ->map(fn (GuideCategory $c) => [
+                'id' => $c->id,
+                'name' => $c->name,
+                'color' => $c->color,
+            ])
+            ->values();
+    }
 
     /**
      * Список гайдов через репозиторий + маппинг для Inertia (карточки).

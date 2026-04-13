@@ -121,7 +121,7 @@ onBeforeUnmount(() => {
 
             <div
                 id="contact-dialog"
-                class="relative flex max-h-[min(100dvh,100vh)] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-slate-200 bg-white shadow-lg sm:max-h-[min(92dvh,92vh)] sm:max-w-5xl sm:rounded-2xl"
+                class="relative flex max-h-[min(100dvh,100vh)] w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-slate-200 bg-white shadow-lg dark:border-slate-600 dark:bg-gray-900 sm:max-h-[min(92dvh,92vh)] sm:max-w-5xl sm:rounded-2xl"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="contact-modal-title"
@@ -152,11 +152,11 @@ onBeforeUnmount(() => {
                 >
                     <!-- Форма: скролл только здесь на узких экранах -->
                     <div
-                        class="order-2 min-h-0 overflow-y-auto overscroll-contain bg-white px-4 py-6 sm:px-8 sm:py-8 lg:order-1"
+                        class="order-2 min-h-0 overflow-y-auto overscroll-contain bg-white px-4 py-6 dark:bg-gray-900 sm:px-8 sm:py-8 lg:order-1"
                         style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom, 0px))"
                     >
                         <div
-                            class="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800"
+                            class="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800 dark:bg-teal-950 dark:text-teal-200"
                         >
                             <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" aria-hidden="true" />
                             Biz onlaýn
@@ -164,11 +164,11 @@ onBeforeUnmount(() => {
 
                         <h2
                             id="contact-modal-title"
-                            class="mt-4 text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl"
+                            class="mt-4 text-2xl font-bold tracking-tight text-slate-800 dark:text-white sm:text-3xl"
                         >
                             Biz bilen habarlaşyň
                         </h2>
-                        <p id="contact-modal-desc" class="mt-1.5 text-sm leading-relaxed text-slate-500">
+                        <p id="contact-modal-desc" class="mt-1.5 text-sm leading-relaxed text-slate-500 dark:text-gray-400">
                             Adatça bir iş gününde jogap berýaris.
                         </p>
 
@@ -201,7 +201,7 @@ onBeforeUnmount(() => {
                                 <label class="sr-only" for="contact-name">At</label>
                                 <div class="relative">
                                     <span
-                                        class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                                        class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-gray-500"
                                         aria-hidden="true"
                                     >
                                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
@@ -217,7 +217,7 @@ onBeforeUnmount(() => {
                                         v-model="form.name"
                                         type="text"
                                         autocomplete="name"
-                                        class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
+                                        class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500 sm:text-sm"
                                         placeholder="Adyňyz"
                                     />
                                 </div>
@@ -228,7 +228,7 @@ onBeforeUnmount(() => {
                                 <label class="sr-only" for="contact-email">E-poçta</label>
                                 <div class="relative">
                                     <span
-                                        class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                                        class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-gray-500"
                                         aria-hidden="true"
                                     >
                                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
@@ -245,7 +245,7 @@ onBeforeUnmount(() => {
                                         type="email"
                                         inputmode="email"
                                         autocomplete="email"
-                                        class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
+                                        class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500 sm:text-sm"
                                         placeholder="mysal@domen.com"
                                     />
                                 </div>
@@ -256,7 +256,7 @@ onBeforeUnmount(() => {
                                 <label class="sr-only" for="contact-subject">Mowzuk</label>
                                 <div class="relative">
                                     <span
-                                        class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                                        class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-gray-500"
                                         aria-hidden="true"
                                     >
                                         <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
@@ -271,7 +271,7 @@ onBeforeUnmount(() => {
                                         id="contact-subject"
                                         v-model="form.subject"
                                         type="text"
-                                        class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
+                                        class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500 sm:text-sm"
                                         placeholder="Size nädip kömek edip bileris?"
                                     />
                                 </div>
@@ -284,7 +284,7 @@ onBeforeUnmount(() => {
                                     id="contact-message"
                                     v-model="form.message"
                                     rows="4"
-                                    class="min-h-[7.5rem] w-full resize-y rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
+                                    class="min-h-[7.5rem] w-full resize-y rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-500 sm:text-sm"
                                     placeholder="Hatyňyzy ýazyň…"
                                 />
                                 <p v-if="form.errors.message" class="mt-1 text-xs text-red-600">{{ form.errors.message }}</p>
@@ -293,7 +293,7 @@ onBeforeUnmount(() => {
                             <div class="flex flex-col gap-2 pt-1 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
                                 <button
                                     type="button"
-                                    class="order-2 min-h-[44px] touch-manipulation text-left text-sm text-slate-500 underline-offset-2 hover:text-slate-800 hover:underline sm:order-1"
+                                    class="order-2 min-h-[44px] touch-manipulation text-left text-sm text-slate-500 underline-offset-2 hover:text-slate-800 hover:underline dark:text-gray-400 dark:hover:text-gray-200 sm:order-1"
                                     @click="closeModal"
                                 >
                                     Ýatyr
@@ -311,10 +311,10 @@ onBeforeUnmount(() => {
 
                     <!-- Декор только lg+: меньше шума на телефоне -->
                     <div
-                        class="order-1 hidden min-h-0 flex-col items-center justify-center bg-slate-50 p-8 lg:flex"
+                        class="order-1 hidden min-h-0 flex-col items-center justify-center bg-slate-50 p-8 dark:bg-gray-800/50 lg:flex"
                     >
                         <div
-                            class="flex max-w-xs flex-col items-center rounded-2xl border border-slate-200 bg-white px-8 py-9"
+                            class="flex max-w-xs flex-col items-center rounded-2xl border border-slate-200 bg-white px-8 py-9 dark:border-gray-600 dark:bg-gray-900"
                         >
                             <div class="flex items-end justify-center gap-3" aria-hidden="true">
                                 <div class="h-12 w-12 rounded-full bg-amber-300" />
@@ -335,8 +335,8 @@ onBeforeUnmount(() => {
                                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                                 />
                             </svg>
-                            <p class="mt-5 text-center text-base font-semibold text-slate-800">Kömek etmäge taýýar</p>
-                            <p class="mt-1 text-center text-sm text-slate-500">Çalt we dostlukly jogaplar</p>
+                            <p class="mt-5 text-center text-base font-semibold text-slate-800 dark:text-white">Kömek etmäge taýýar</p>
+                            <p class="mt-1 text-center text-sm text-slate-500 dark:text-gray-400">Çalt we dostlukly jogaplar</p>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,10 @@ class GuideCategoryService
      */
     public function createCategory(array $data): GuideCategory
     {
-        return $this->guideCategoryRepository->create($data);
+        $category = $this->guideCategoryRepository->create($data);
+        $this->guideCategoryRepository->forgetCategoriesForSelectCache();
+
+        return $category;
     }
 
     /**
@@ -41,7 +44,10 @@ class GuideCategoryService
      */
     public function updateCategory(GuideCategory $category, array $data): GuideCategory
     {
-        return $this->guideCategoryRepository->update($category, $data);
+        $updated = $this->guideCategoryRepository->update($category, $data);
+        $this->guideCategoryRepository->forgetCategoriesForSelectCache();
+
+        return $updated;
     }
 
     /**
@@ -56,6 +62,7 @@ class GuideCategoryService
         }
 
         $this->guideCategoryRepository->delete($category);
+        $this->guideCategoryRepository->forgetCategoriesForSelectCache();
     }
 
     /**
@@ -66,5 +73,6 @@ class GuideCategoryService
     public function reorderCategories(array $ids): void
     {
         $this->guideCategoryRepository->reorder($ids);
+        $this->guideCategoryRepository->forgetCategoriesForSelectCache();
     }
 }

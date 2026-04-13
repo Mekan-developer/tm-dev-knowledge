@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Guide\StoreGuideRequest;
 use App\Http\Requests\Guide\UpdateGuideRequest;
 use App\Models\Guide;
-use App\Models\GuideCategory;
 use App\Services\GuideService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
@@ -28,7 +27,7 @@ class AdminGuideController extends Controller
     {
         return Inertia::render('GuideForm', [
             'guide' => null,
-            'categories' => GuideCategory::query()->orderBy('sort_order')->get(['id', 'name', 'color']),
+            'categories' => $this->guideService->getCategoriesForSelect(),
             'formContext' => 'admin',
             'cancelTo' => ['name' => 'admin.dashboard'],
         ]);
@@ -58,7 +57,7 @@ class AdminGuideController extends Controller
                 'tags' => $guide->tags,
                 'steps' => implode("\n", $guide->steps),
             ],
-            'categories' => GuideCategory::query()->orderBy('sort_order')->get(['id', 'name', 'color']),
+            'categories' => $this->guideService->getCategoriesForSelect(),
             'formContext' => 'admin',
             'cancelTo' => ['name' => 'admin.dashboard'],
         ]);
