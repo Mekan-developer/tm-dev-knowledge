@@ -23,7 +23,7 @@ jobs:
           tools: composer:v2
 
       - name: Cache composer dependencies
-        uses: actions/cache@v4 # Обновил до v4 для поддержки Node 24
+        uses: actions/cache@v4
         with:
           path: vendor
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -46,7 +46,11 @@ jobs:
           script: |
             set -e
 
-            # 1. Решаем проблему "dubious ownership" (Error 128)
+            # 1. Принудительно исправляем права доступа, если они "сломались"
+            # (Команда берет текущего пользователя и делает его владельцем папки)
+            sudo chown -R $USER:$USER ${{ secrets.PROJECT_PATH }}
+
+            # Решаем проблему safe.directory
             git config --global --add safe.directory ${{ secrets.PROJECT_PATH }}
 
             cd ${{ secrets.PROJECT_PATH }}
@@ -57,19 +61,18 @@ jobs:
             git clean -fd
 
             # 3. Установка зависимостей и фронтенд
-            # (Убедись, что на сервере есть npm и composer)
             composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
             npm install
             npm run build
 
-            # 4. База данных и права
+            # 4. База данных и права для веб-сервера
             php artisan migrate --force
 
-            # Используем sudo для chown, так как это системные права
+            # Важно: отдаем права папкам кеша пользователю www-data (для Nginx/PHP-FPM)
             sudo chown -R www-data:www-data storage bootstrap/cache
             sudo chmod -R 775 storage bootstrap/cache
 
-            # 5. Глубокая очистка и прогрев кеша
+            # 5. Оптимизация
             php artisan optimize:clear
             php artisan config:cache
             php artisan route:cache
