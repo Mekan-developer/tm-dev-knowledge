@@ -46,42 +46,42 @@ jobs:
           script: |
             set -e
 
-            # 1. Принудительно исправляем права доступа, если они "сломались"
-            # (Команда берет текущего пользователя и делает его владельцем папки)
+            # 1. Исправляем права на папку проекта для пользователя deploy
+            # (Теперь sudo сработает без пароля, если ты настроил visudo)
             sudo chown -R $USER:$USER ${{ secrets.PROJECT_PATH }}
 
-            # Решаем проблему safe.directory
+            # Разрешаем Git работать в этой папке
             git config --global --add safe.directory ${{ secrets.PROJECT_PATH }}
 
             cd ${{ secrets.PROJECT_PATH }}
 
-            # 2. Синхронизация кода
+            # 2. Обновление кода
             git fetch origin main
             git reset --hard origin/main
             git clean -fd
 
-            # 3. Установка зависимостей и фронтенд
+            # 3. Зависимости и сборка фронтенда
             composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
             npm install
             npm run build
 
-            # 4. База данных и права для веб-сервера
+            # 4. Laravel задачи
             php artisan migrate --force
 
-            # Важно: отдаем права папкам кеша пользователю www-data (для Nginx/PHP-FPM)
+            # Возвращаем права веб-серверу на нужные папки
             sudo chown -R www-data:www-data storage bootstrap/cache
             sudo chmod -R 775 storage bootstrap/cache
 
-            # 5. Оптимизация
+            # Полная очистка кеша
             php artisan optimize:clear
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
 
-            # 6. Перезапуск PHP
+            # 5. Перезапуск PHP-FPM
             sudo systemctl restart php-fpm || true
 
-            echo "✅ Deployment успешно завершен!"
+            echo "🚀 Все готово! Сайт обновлен."
 
       - name: Notify on success
         if: success()
@@ -89,4 +89,4 @@ jobs:
 
       - name: Notify on failure
         if: failure()
-        run: echo "❌ Развертывание не удалось. Проверьте логи SSH шага."
+        run: echo "❌ Развертывание не удалось. Проверьте логи в GitHub Actions."
