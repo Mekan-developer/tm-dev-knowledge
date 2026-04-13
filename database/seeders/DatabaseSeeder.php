@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(GuideCategorySeeder::class);
-
         $this->call(GitGuideSeeder::class);
         $this->call(PhpGuideSeeder::class);
         $this->call(LaravelGuideSeeder::class);
