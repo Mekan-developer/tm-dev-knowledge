@@ -41,14 +41,14 @@ watch(guideCategoryId, () => {
 
 <template>
     <AdminLayout>
-        <Head title="Admin — Guides" />
+        <Head title="Administrator — Gollanmalar" />
 
         <div class="mx-auto max-w-6xl space-y-4 px-4 py-6 md:px-8">
             <input
                 v-model="search"
                 type="search"
                 class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                placeholder="Search by topic or technology..."
+                placeholder="Mowzuk ýa-da tehnologiýa boýunça gözleg…"
                 autocomplete="off"
             />
 
@@ -70,12 +70,12 @@ watch(guideCategoryId, () => {
                 v-else
                 class="flex flex-col items-center rounded-xl border border-dashed border-gray-200 bg-white px-6 py-14 text-center"
             >
-                <p class="text-gray-600">No guides match your filters.</p>
+                <p class="text-gray-600">Süzgüçleriňize laýyk gollanma ýok.</p>
                 <Link
                     :href="route('admin.guides.create')"
                     class="mt-4 rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700"
                 >
-                    + New Guide
+                    + Täze gollanma
                 </Link>
             </div>
 

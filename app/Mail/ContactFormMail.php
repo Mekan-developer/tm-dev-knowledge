@@ -26,7 +26,7 @@ class ContactFormMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: sprintf('[DevKnowledge] %s — from %s', $this->payload['subject'], $this->payload['name']),
+            subject: sprintf('[DevKnowledge] %s — %s tarapyndan', $this->payload['subject'], $this->payload['name']),
             replyTo: [
                 new Address($this->payload['email'], $this->payload['name']),
             ],

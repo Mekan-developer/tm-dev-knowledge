@@ -39,31 +39,31 @@ async function installPwa() {
                         class="inline-flex rounded-lg border border-gray-300 px-3 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-50"
                         @click="installPwa"
                     >
-                        Install app
+                        Programmany gurna
                     </button>
                     <Link
                         :href="route('admin.dashboard')"
                         class="text-sm font-medium text-gray-600 hover:text-gray-900"
                     >
-                        All guides
+                        Ähli gollanmalar
                     </Link>
                     <Link
                         :href="route('admin.users.index')"
                         class="text-sm font-medium text-gray-600 hover:text-gray-900"
                     >
-                        Users
+                        Ulanyjylar
                     </Link>
                     <Link
                         :href="route('admin.categories.index')"
                         class="text-sm font-medium text-gray-600 hover:text-gray-900"
                     >
-                        Categories
+                        Kategoriýalar
                     </Link>
                     <Link
                         :href="route('admin.guides.create')"
                         class="rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
                     >
-                        + New Guide
+                        + Täze gollanma
                     </Link>
                     <Link
                         :href="route('admin.logout')"
@@ -71,7 +71,7 @@ async function installPwa() {
                         as="button"
                         class="text-sm font-semibold text-gray-500 hover:text-gray-800"
                     >
-                        Logout
+                        Çykyş
                     </Link>
                 </div>
             </div>

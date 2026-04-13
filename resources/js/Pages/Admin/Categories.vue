@@ -65,7 +65,7 @@ function cancelEdit() {
 /** Удаляет категорию, если в ней нет гайдов. */
 function destroyCategory(category) {
     if (category.guides_count > 0) return;
-    if (!confirm('Удалить категорию?')) return;
+    if (!confirm('Kategoriýany pozmak isleýärsiňizmi?')) return;
     useForm({}).delete(route('admin.categories.destroy', category.id), { preserveScroll: true });
 }
 
@@ -82,18 +82,18 @@ function moveCategory(categoryId, direction) {
 
 <template>
     <AdminLayout>
-        <Head title="Admin — Categories" />
+        <Head title="Administrator — Kategoriýalar" />
 
         <div class="mx-auto max-w-6xl space-y-6 px-4 py-6 md:px-8">
             <section class="rounded-xl border border-gray-200 bg-white p-4">
-                <h1 class="text-lg font-bold text-gray-900">Категории гайдов</h1>
-                <p class="mt-1 text-sm text-gray-500">Добавьте новую категорию и выберите ее цвет.</p>
+                <h1 class="text-lg font-bold text-gray-900">Gollanma kategoriýalary</h1>
+                <p class="mt-1 text-sm text-gray-500">Täze kategoriýa goşuň we reňkini saýlaň.</p>
 
                 <form class="mt-4 grid gap-3 md:grid-cols-4" @submit.prevent="submitCreate">
                     <input
                         v-model="createForm.name"
                         type="text"
-                        placeholder="Например: Laravel"
+                        placeholder="Mysal: Laravel"
                         class="rounded-lg border border-gray-300 px-3 py-2 text-sm"
                     />
 
@@ -109,7 +109,7 @@ function moveCategory(categoryId, direction) {
                     </div>
 
                     <button type="submit" class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white">
-                        Add
+                        Goş
                     </button>
                 </form>
             </section>
@@ -118,13 +118,13 @@ function moveCategory(categoryId, direction) {
                 <table class="min-w-full text-left text-sm">
                     <thead class="bg-gray-50 text-xs uppercase text-gray-500">
                         <tr>
-                            <th class="px-3 py-2">Badge</th>
-                            <th class="px-3 py-2">Name</th>
+                            <th class="px-3 py-2">Badj</th>
+                            <th class="px-3 py-2">At</th>
                             <th class="px-3 py-2">Slug</th>
-                            <th class="px-3 py-2">Color</th>
-                            <th class="px-3 py-2">Guides count</th>
-                            <th class="px-3 py-2">Sort</th>
-                            <th class="px-3 py-2">Actions</th>
+                            <th class="px-3 py-2">Reňk</th>
+                            <th class="px-3 py-2">Gollanma sany</th>
+                            <th class="px-3 py-2">Tertip</th>
+                            <th class="px-3 py-2">Hereketler</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -172,19 +172,19 @@ function moveCategory(categoryId, direction) {
                             <td class="px-3 py-2">
                                 <div class="flex items-center gap-2">
                                     <template v-if="editId === category.id">
-                                        <button type="button" class="text-blue-600" @click="saveEdit(category.id)">Save</button>
-                                        <button type="button" class="text-gray-600" @click="cancelEdit">Cancel</button>
+                                        <button type="button" class="text-blue-600" @click="saveEdit(category.id)">Ýatla</button>
+                                        <button type="button" class="text-gray-600" @click="cancelEdit">Ýatyr</button>
                                     </template>
                                     <template v-else>
-                                        <button type="button" class="text-blue-600" @click="startEdit(category)">Edit</button>
+                                        <button type="button" class="text-blue-600" @click="startEdit(category)">Üýtget</button>
                                         <button
                                             type="button"
                                             class="text-red-600 disabled:cursor-not-allowed disabled:text-gray-300"
                                             :disabled="category.guides_count > 0"
-                                            :title="category.guides_count > 0 ? 'Нельзя удалить категорию с гайдами' : 'Удалить категорию'"
+                                            :title="category.guides_count > 0 ? 'Gollanmalary bar kategoriýany pozup bolanok' : 'Kategoriýany poz'"
                                             @click="destroyCategory(category)"
                                         >
-                                            Delete
+                                            Poz
                                         </button>
                                     </template>
                                 </div>

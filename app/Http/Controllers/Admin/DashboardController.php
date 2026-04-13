@@ -34,7 +34,7 @@ class DashboardController extends Controller
         );
 
         return Inertia::render('Admin/Dashboard', [
-            'guides' => $guides,
+            'guides' => $this->guideService->paginatorForInertia($guides),
             'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
                 'id' => $category->id,
                 'name' => $category->name,

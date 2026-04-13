@@ -37,7 +37,7 @@ class GuideController extends Controller
         );
 
         return Inertia::render('Home', [
-            'guides' => $guides,
+            'guides' => $this->guideService->paginatorForInertia($guides),
             'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
                 'id' => $category->id,
                 'name' => $category->name,
@@ -47,7 +47,7 @@ class GuideController extends Controller
                 'guide_category_id' => $guideCategoryId,
                 'q' => $q,
             ],
-            'pageTitle' => 'Guides',
+            'pageTitle' => 'Gollanmalar',
             'listRouteName' => 'home',
         ]);
     }
@@ -72,7 +72,7 @@ class GuideController extends Controller
         );
 
         return Inertia::render('Home', [
-            'guides' => $guides,
+            'guides' => $this->guideService->paginatorForInertia($guides),
             'categories' => GuideCategory::forSelect()->map(fn (GuideCategory $category) => [
                 'id' => $category->id,
                 'name' => $category->name,
@@ -82,7 +82,7 @@ class GuideController extends Controller
                 'guide_category_id' => $guideCategoryId,
                 'q' => $q,
             ],
-            'pageTitle' => 'My guides',
+            'pageTitle' => 'Mening gollanmalarym',
             'listRouteName' => 'my-guides',
         ]);
     }

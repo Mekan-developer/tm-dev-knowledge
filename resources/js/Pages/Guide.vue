@@ -34,7 +34,7 @@ const editHref = computed(() => {
 
 /** Удаление гайда с учётом роли. */
 function destroyGuide() {
-    if (!confirm('Delete this guide?')) return;
+    if (!confirm('Bu gollanmany pozmak isleýärsiňizmi?')) return;
     if (isAdminUser.value) {
         router.delete(route('admin.guides.destroy', props.guide.id));
         return;
@@ -67,7 +67,7 @@ function formatDate(iso) {
                     class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-gray-900"
                 >
                     <span class="text-lg leading-none" aria-hidden="true">←</span>
-                    Back
+                    Yzyna
                 </Link>
             </div>
 
@@ -93,7 +93,7 @@ function formatDate(iso) {
                 </div>
 
                 <p class="text-sm text-gray-500">
-                    by {{ guide.author_name }} · {{ formatDate(guide.updated_at) }}
+                    {{ guide.author_name }} tarapyndan · {{ formatDate(guide.updated_at) }}
                 </p>
 
                 <div v-if="showActions" class="flex flex-wrap gap-3">
@@ -101,14 +101,14 @@ function formatDate(iso) {
                         :href="editHref"
                         class="text-sm font-semibold text-blue-600 hover:text-blue-800"
                     >
-                        Edit
+                        Üýtget
                     </Link>
                     <button
                         type="button"
                         class="text-sm font-semibold text-red-600 hover:text-red-800"
                         @click="destroyGuide"
                     >
-                        Delete
+                        Poz
                     </button>
                 </div>
 

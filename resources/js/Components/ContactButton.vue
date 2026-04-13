@@ -103,7 +103,7 @@ onBeforeUnmount(() => {
                     stroke-linejoin="round"
                 />
             </svg>
-            <span class="sr-only">Open contact form</span>
+            <span class="sr-only">Habarlaşyk formasyny aç</span>
         </button>
     </div>
 
@@ -134,7 +134,7 @@ onBeforeUnmount(() => {
                     <button
                         type="button"
                         class="flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded-lg text-white/90 hover:bg-white/10 hover:text-white"
-                        aria-label="Close dialog"
+                        aria-label="Penjireni ýap"
                         @click="closeModal"
                     >
                         <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -159,17 +159,17 @@ onBeforeUnmount(() => {
                             class="inline-flex items-center gap-2 rounded-full bg-teal-50 px-3 py-1 text-xs font-medium text-teal-800"
                         >
                             <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500" aria-hidden="true" />
-                            We're online
+                            Biz onlaýn
                         </div>
 
                         <h2
                             id="contact-modal-title"
                             class="mt-4 text-2xl font-bold tracking-tight text-slate-800 sm:text-3xl"
                         >
-                            Contact us
+                            Biz bilen habarlaşyň
                         </h2>
                         <p id="contact-modal-desc" class="mt-1.5 text-sm leading-relaxed text-slate-500">
-                            We usually reply within one business day.
+                            Adatça bir iş gününde jogap berýaris.
                         </p>
 
                         <p
@@ -177,7 +177,7 @@ onBeforeUnmount(() => {
                             class="mt-5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-sm text-emerald-900"
                             role="status"
                         >
-                            Your message has been sent! I will reply to your email soon.
+                            Hatyňyz iberildi! Ýakynda e-poçtaňyza jogap bereris.
                         </p>
                         <p
                             v-else-if="form.errors.contact"
@@ -198,7 +198,7 @@ onBeforeUnmount(() => {
                             />
 
                             <div>
-                                <label class="sr-only" for="contact-name">Name</label>
+                                <label class="sr-only" for="contact-name">At</label>
                                 <div class="relative">
                                     <span
                                         class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
@@ -218,14 +218,14 @@ onBeforeUnmount(() => {
                                         type="text"
                                         autocomplete="name"
                                         class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
-                                        placeholder="Your name"
+                                        placeholder="Adyňyz"
                                     />
                                 </div>
                                 <p v-if="form.errors.name" class="mt-1 text-xs text-red-600">{{ form.errors.name }}</p>
                             </div>
 
                             <div>
-                                <label class="sr-only" for="contact-email">Email</label>
+                                <label class="sr-only" for="contact-email">E-poçta</label>
                                 <div class="relative">
                                     <span
                                         class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
@@ -246,14 +246,14 @@ onBeforeUnmount(() => {
                                         inputmode="email"
                                         autocomplete="email"
                                         class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
-                                        placeholder="you@example.com"
+                                        placeholder="mysal@domen.com"
                                     />
                                 </div>
                                 <p v-if="form.errors.email" class="mt-1 text-xs text-red-600">{{ form.errors.email }}</p>
                             </div>
 
                             <div>
-                                <label class="sr-only" for="contact-subject">Subject</label>
+                                <label class="sr-only" for="contact-subject">Mowzuk</label>
                                 <div class="relative">
                                     <span
                                         class="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"
@@ -272,20 +272,20 @@ onBeforeUnmount(() => {
                                         v-model="form.subject"
                                         type="text"
                                         class="min-h-[44px] w-full rounded-full border border-slate-200 bg-white py-2.5 pl-11 pr-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
-                                        placeholder="How can we help?"
+                                        placeholder="Size nädip kömek edip bileris?"
                                     />
                                 </div>
                                 <p v-if="form.errors.subject" class="mt-1 text-xs text-red-600">{{ form.errors.subject }}</p>
                             </div>
 
                             <div>
-                                <label class="sr-only" for="contact-message">Message</label>
+                                <label class="sr-only" for="contact-message">Hat</label>
                                 <textarea
                                     id="contact-message"
                                     v-model="form.message"
                                     rows="4"
                                     class="min-h-[7.5rem] w-full resize-y rounded-2xl border border-slate-200 bg-white px-4 py-3 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-teal-500 focus:ring-1 focus:ring-teal-500 sm:text-sm"
-                                    placeholder="Write your message…"
+                                    placeholder="Hatyňyzy ýazyň…"
                                 />
                                 <p v-if="form.errors.message" class="mt-1 text-xs text-red-600">{{ form.errors.message }}</p>
                             </div>
@@ -296,14 +296,14 @@ onBeforeUnmount(() => {
                                     class="order-2 min-h-[44px] touch-manipulation text-left text-sm text-slate-500 underline-offset-2 hover:text-slate-800 hover:underline sm:order-1"
                                     @click="closeModal"
                                 >
-                                    Cancel
+                                    Ýatyr
                                 </button>
                                 <button
                                     type="submit"
                                     class="order-1 min-h-[48px] w-full touch-manipulation rounded-full bg-teal-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-teal-700 disabled:cursor-not-allowed disabled:opacity-50 sm:order-2 sm:ml-auto sm:w-auto sm:min-w-[11rem]"
                                     :disabled="form.processing"
                                 >
-                                    {{ form.processing ? 'Sending…' : 'Send message' }}
+                                    {{ form.processing ? 'Iberilýär…' : 'Hat ibermek' }}
                                 </button>
                             </div>
                         </form>
@@ -335,8 +335,8 @@ onBeforeUnmount(() => {
                                     d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                                 />
                             </svg>
-                            <p class="mt-5 text-center text-base font-semibold text-slate-800">We're here to help</p>
-                            <p class="mt-1 text-center text-sm text-slate-500">Fast, friendly replies</p>
+                            <p class="mt-5 text-center text-base font-semibold text-slate-800">Kömek etmäge taýýar</p>
+                            <p class="mt-1 text-center text-sm text-slate-500">Çalt we dostlukly jogaplar</p>
                         </div>
                     </div>
                 </div>

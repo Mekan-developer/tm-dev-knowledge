@@ -33,7 +33,7 @@ const { badgeClass } = useCategoryColor();
                 "
                 @click="emit('update:modelValue', null)"
             >
-                All
+                Ähli
             </button>
 
             <button

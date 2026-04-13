@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Repositories\Contracts\GuideRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * Бизнес-логика гайдов: списки для Inertia, CRUD, права редактирования.
@@ -28,6 +29,44 @@ class GuideService
         $paginator = $this->guideRepository->getAll($filters);
 
         return $paginator->through(fn (Guide $guide) => $this->toListItem($guide, $viewer));
+    }
+
+    /**
+     * Paginator massiwine Inertia üçin «Öňki / Indiki» ýazgylaryny Türkmençe goşýar (app-locale nädogry bolsa hem).
+     *
+     * @return array<string, mixed>
+     */
+    public function paginatorForInertia(LengthAwarePaginator $paginator): array
+    {
+        $payload = $paginator->toArray();
+        $payload['links'] = $this->paginationLinksWithTurkmenLabels($payload['links'] ?? []);
+
+        return $payload;
+    }
+
+    /**
+     * Previous/Next arkalyşyklaryny lang/tk/pagination.php boýunça düzýär.
+     *
+     * @param  list<array{url: ?string, label: string, active: bool}>  $links
+     * @return list<array{url: ?string, label: string, active: bool}>
+     */
+    private function paginationLinksWithTurkmenLabels(array $links): array
+    {
+        return collect($links)
+            ->map(function (array $link) {
+                $label = (string) ($link['label'] ?? '');
+                $plain = html_entity_decode(strip_tags($label), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                $lower = mb_strtolower($plain);
+
+                if (str_contains($lower, 'previous')) {
+                    $link['label'] = Lang::get('pagination.previous', [], 'tk');
+                } elseif (str_contains($lower, 'next')) {
+                    $link['label'] = Lang::get('pagination.next', [], 'tk');
+                }
+
+                return $link;
+            })
+            ->all();
     }
 
     /**

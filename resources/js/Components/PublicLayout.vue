@@ -24,13 +24,13 @@ const isContributor = computed(() => page.props.auth?.user?.role === 'contributo
                         :href="route('my-guides')"
                         class="text-sm font-medium text-gray-600 hover:text-gray-900"
                     >
-                        My guides
+                        Mening gollanmalarym
                     </Link>
                     <Link
                         :href="route('guides.create')"
                         class="rounded-lg bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
                     >
-                        + Add Guide
+                        + Gollanma goş
                     </Link>
                     <Link
                         :href="route('logout')"
@@ -38,7 +38,7 @@ const isContributor = computed(() => page.props.auth?.user?.role === 'contributo
                         as="button"
                         class="text-sm font-semibold text-gray-500 hover:text-gray-800"
                     >
-                        Logout
+                        Çykyş
                     </Link>
                 </div>
             </div>

@@ -14,7 +14,7 @@ const props = defineProps({
     filters: Object,
     pageTitle: {
         type: String,
-        default: 'Guides',
+        default: 'Gollanmalar',
     },
     listRouteName: {
         type: String,
@@ -56,7 +56,7 @@ watch(guideCategoryId, () => {
                 v-model="search"
                 type="search"
                 class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                placeholder="Search by topic or technology..."
+                placeholder="Mowzuk ýa-da tehnologiýa boýunça gözleg…"
                 autocomplete="off"
             />
 
@@ -79,9 +79,9 @@ watch(guideCategoryId, () => {
                 >
                     📚
                 </div>
-                <h2 class="text-lg font-bold text-gray-900">No guides yet</h2>
+                <h2 class="text-lg font-bold text-gray-900">Häzirlikçä gollanma ýok</h2>
                 <p class="mt-1 max-w-sm text-sm text-gray-500">
-                    Save commands and snippets you actually reuse.
+                    Ulanylýan buýurmalary we gysgaça ýazgylary ýatda saklaň.
                 </p>
             </div>
 

@@ -78,16 +78,16 @@ function submit() {
 
 <template>
     <AdminLayout v-if="isAdminForm">
-        <Head :title="isEdit ? 'Edit guide' : 'New guide'" />
+        <Head :title="isEdit ? 'Gollanmany üýtgetmek' : 'Täze gollanma'" />
 
         <div class="mx-auto max-w-6xl px-4 py-6 md:px-8">
             <form class="mx-auto max-w-2xl space-y-4" @submit.prevent="submit">
                 <h1 class="text-xl font-bold text-gray-900">
-                    {{ isEdit ? 'Edit guide' : 'New guide' }}
+                    {{ isEdit ? 'Gollanmany üýtgetmek' : 'Täze gollanma' }}
                 </h1>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Title</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Ady</label>
                     <input
                         v-model="form.title"
                         type="text"
@@ -99,7 +99,7 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Category</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Kategoriýa</label>
                     <select
                         v-model="form.guide_category_id"
                         class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -125,7 +125,7 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Description</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Düşündiriş</label>
                     <textarea
                         v-model="form.description"
                         rows="3"
@@ -137,12 +137,12 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Tags</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Bellikler</label>
                     <TagInput v-model="form.tags" />
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Steps (one per line)</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Ädimler (her setirde bir ädim)</label>
                     <textarea
                         v-model="form.steps"
                         rows="8"
@@ -158,14 +158,14 @@ function submit() {
                         :href="cancelHref"
                         class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50"
                     >
-                        Cancel
+                        Ýatyr
                     </Link>
                     <button
                         type="submit"
                         class="rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
                         :disabled="form.processing"
                     >
-                        Save
+                        Ýatla
                     </button>
                 </div>
             </form>
@@ -173,16 +173,16 @@ function submit() {
     </AdminLayout>
 
     <PublicLayout v-else>
-        <Head :title="isEdit ? 'Edit guide' : 'New guide'" />
+        <Head :title="isEdit ? 'Gollanmany üýtgetmek' : 'Täze gollanma'" />
 
         <div class="mx-auto max-w-6xl px-4 py-6 md:px-8">
             <form class="mx-auto max-w-2xl space-y-4" @submit.prevent="submit">
                 <h1 class="text-xl font-bold text-gray-900">
-                    {{ isEdit ? 'Edit guide' : 'New guide' }}
+                    {{ isEdit ? 'Gollanmany üýtgetmek' : 'Täze gollanma' }}
                 </h1>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Title</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Ady</label>
                     <input
                         v-model="form.title"
                         type="text"
@@ -194,7 +194,7 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Category</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Kategoriýa</label>
                     <select
                         v-model="form.guide_category_id"
                         class="w-full rounded-lg border border-gray-300 bg-white px-3.5 py-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
@@ -220,7 +220,7 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Description</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Düşündiriş</label>
                     <textarea
                         v-model="form.description"
                         rows="3"
@@ -232,12 +232,12 @@ function submit() {
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Tags</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Bellikler</label>
                     <TagInput v-model="form.tags" />
                 </div>
 
                 <div>
-                    <label class="mb-1 block text-xs font-semibold text-gray-600">Steps (one per line)</label>
+                    <label class="mb-1 block text-xs font-semibold text-gray-600">Ädimler (her setirde bir ädim)</label>
                     <textarea
                         v-model="form.steps"
                         rows="8"
@@ -253,14 +253,14 @@ function submit() {
                         :href="cancelHref"
                         class="rounded-lg border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50"
                     >
-                        Cancel
+                        Ýatyr
                     </Link>
                     <button
                         type="submit"
                         class="rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
                         :disabled="form.processing"
                     >
-                        Save
+                        Ýatla
                     </button>
                 </div>
             </form>

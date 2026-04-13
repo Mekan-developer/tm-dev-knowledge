@@ -13,15 +13,15 @@ class GuideCategorySeeder extends Seeder
     public function run(): void
     {
         $categorySeed = [
-            ['name' => 'Docker', 'color' => 'blue'],
             ['name' => 'Git', 'color' => 'amber'],
+            ['name' => 'DevOps', 'color' => 'sky'],
+            ['name' => 'Docker', 'color' => 'blue'],
+            ['name' => 'PHP', 'color' => 'red'],
+            ['name' => 'Laravel', 'color' => 'red'],
+            ['name' => 'Database', 'color' => 'yellow'],
             ['name' => 'Linux', 'color' => 'green'],
             ['name' => 'Python', 'color' => 'orange'],
             ['name' => 'JS/TS', 'color' => 'purple'],
-            ['name' => 'DevOps', 'color' => 'sky'],
-            ['name' => 'Database', 'color' => 'yellow'],
-            ['name' => 'PHP', 'color' => 'red'],
-            ['name' => 'Laravel', 'color' => 'red'],
             ['name' => 'Other', 'color' => 'gray'],
         ];
 

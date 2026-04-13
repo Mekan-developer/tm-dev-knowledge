@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 RateLimiter::for('contact', function (Request $request) {
     return Limit::perHour(3)->by($request->ip())->response(function () {
         return back()->withErrors([
-            'contact' => 'Too many messages. Please try again later.',
+            'contact' => 'Hatlar köp. Soňra täzeden synanyşyň.',
         ]);
     });
 });
@@ -48,7 +48,7 @@ Route::middleware('guest.admin')->group(function () {
     Route::post('/admin/login', [AdminLoginController::class, 'store']);
 });
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin,contributor'])->prefix('admin')->name('admin.')->group(function () {
     Route::post('/logout', [AdminLoginController::class, 'destroy'])->name('logout');
     Route::get('/', DashboardController::class)->name('dashboard');
     Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');

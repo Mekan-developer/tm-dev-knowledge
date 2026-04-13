@@ -30,7 +30,7 @@ function plainStepText(step) {
     return String(step).replace(/`([^`]+)`/g, '$1');
 }
 
-/** Копирование с индикацией «Copied!». */
+/** Kopýalanylanda «Göçürildi!» görkezýär. */
 async function copyStep(i, step) {
     const text = plainStepText(step);
     try {
@@ -38,7 +38,7 @@ async function copyStep(i, step) {
     } catch {
         return;
     }
-    copyLabel.value = { ...copyLabel.value, [i]: 'Copied!' };
+    copyLabel.value = { ...copyLabel.value, [i]: 'Göçürildi!' };
     setTimeout(() => {
         const next = { ...copyLabel.value };
         delete next[i];
@@ -49,7 +49,7 @@ async function copyStep(i, step) {
 
 <template>
     <div class="space-y-4">
-        <h2 class="text-lg font-bold text-gray-900">Steps</h2>
+        <h2 class="text-lg font-bold text-gray-900">Ädimler</h2>
         <div v-for="(step, i) in steps" :key="i" class="flex gap-3">
             <div
                 class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white"
@@ -71,13 +71,13 @@ async function copyStep(i, step) {
                 type="button"
                 class="h-fit shrink-0 rounded-md px-2.5 py-1.5 text-xs font-semibold transition"
                 :class="
-                    copyLabel[i] === 'Copied!'
+                    copyLabel[i] === 'Göçürildi!'
                         ? 'bg-emerald-100 text-emerald-800'
                         : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
                 "
                 @click="copyStep(i, step)"
             >
-                {{ copyLabel[i] ?? 'Copy' }}
+                {{ copyLabel[i] ?? 'Göçür' }}
             </button>
         </div>
     </div>

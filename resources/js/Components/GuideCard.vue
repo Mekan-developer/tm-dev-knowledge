@@ -36,7 +36,7 @@ const editHref = computed(() => {
 
 /** Удаление гайда с учётом контекста admin / contributor. */
 function destroyGuide() {
-    if (!confirm('Delete this guide?')) return;
+    if (!confirm('Bu gollanmany pozmak isleýärsiňizmi?')) return;
     if (props.adminMode || isAdminUser.value) {
         router.delete(route('admin.guides.destroy', props.guide.id));
         return;
@@ -80,21 +80,21 @@ function destroyGuide() {
             </span>
         </div>
         <p class="text-[11px] text-gray-400">
-            by {{ guide.author_name }}
+            {{ guide.author_name }} tarapyndan
         </p>
         <div v-if="showActions" class="flex gap-2 border-t border-gray-100 pt-2">
             <Link
                 :href="editHref"
                 class="text-xs font-semibold text-blue-600 hover:text-blue-800"
             >
-                Edit
+                Üýtget
             </Link>
             <button
                 type="button"
                 class="text-xs font-semibold text-red-600 hover:text-red-800"
                 @click="destroyGuide"
             >
-                Delete
+                Poz
             </button>
         </div>
     </div>

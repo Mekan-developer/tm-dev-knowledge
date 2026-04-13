@@ -52,7 +52,7 @@ function removeAt(i) {
             v-model="draft"
             type="text"
             class="min-w-[8rem] flex-1 border-0 bg-transparent text-sm text-gray-900 outline-none placeholder:text-gray-400"
-            placeholder="Add tag + Enter"
+            placeholder="Bellik goş + Enter"
             @keydown.enter.prevent="commitTag"
         />
     </div>

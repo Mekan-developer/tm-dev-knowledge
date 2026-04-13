@@ -23,12 +23,11 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Forgot Password" />
+        <Head title="Açar sözü ýatdan çykardyňyzmy" />
 
         <div class="mb-4 text-sm text-gray-600">
-            Forgot your password? No problem. Just let us know your email
-            address and we will email you a password reset link that will allow
-            you to choose a new one.
+            Açar söziňizi ýatdan çykardyňyzmy? E-poçta salgyňyzy ýazyň — size täze
+            açar söz saýlamaga mümkinçilik berýän baglanyşyk ibereris.
         </div>
 
         <div
@@ -40,7 +39,7 @@ const submit = () => {
 
         <form @submit.prevent="submit">
             <div>
-                <InputLabel for="email" value="Email" />
+                <InputLabel for="email" value="E-poçta" />
 
                 <TextInput
                     id="email"
@@ -60,7 +59,7 @@ const submit = () => {
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
-                    Email Password Reset Link
+                    Täzeleme baglanyşygy ibermek
                 </PrimaryButton>
             </div>
         </form>

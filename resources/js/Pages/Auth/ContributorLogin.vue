@@ -18,18 +18,18 @@ function submit() {
 </script>
 
 <template>
-    <Head title="Contributor login" />
+    <Head title="Goşantçy girişi" />
 
     <div
         class="flex min-h-dvh flex-col items-center justify-center bg-gray-100 px-4 py-12"
     >
         <div class="w-full max-w-sm rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
             <h1 class="mb-6 text-center text-xl font-bold text-gray-900">DevKnowledge</h1>
-            <p class="mb-4 text-center text-sm text-gray-500">Contributor sign in</p>
+            <p class="mb-4 text-center text-sm text-gray-500">Goşantçy hasaby bilen giriş</p>
             <form class="space-y-4" @submit.prevent="submit">
                 <div>
                     <label class="mb-1 block text-xs font-semibold text-gray-600" for="c-email"
-                        >Email</label
+                        >E-poçta</label
                     >
                     <input
                         id="c-email"
@@ -45,7 +45,7 @@ function submit() {
                 </div>
                 <div>
                     <label class="mb-1 block text-xs font-semibold text-gray-600" for="c-password"
-                        >Password</label
+                        >Açar söz</label
                     >
                     <input
                         id="c-password"
@@ -58,14 +58,14 @@ function submit() {
                 </div>
                 <label class="flex items-center gap-2 text-sm text-gray-600">
                     <input v-model="form.remember" type="checkbox" class="rounded border-gray-300" />
-                    Remember me
+                    Ýatda sakla
                 </label>
                 <button
                     type="submit"
                     class="w-full rounded-lg bg-blue-600 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
                     :disabled="form.processing"
                 >
-                    Login
+                    Giriş
                 </button>
             </form>
         </div>

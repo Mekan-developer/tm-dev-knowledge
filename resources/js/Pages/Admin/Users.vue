@@ -60,7 +60,7 @@ function formatDate(iso) {
 
 /** Удаление контрибьютора с подтверждением. */
 function removeContributor(id) {
-    if (!confirm('Remove this contributor? Their guides will stay with author "Deleted user".')) {
+    if (!confirm('Bu goşantçyny aýyrmak isleýärsiňizmi? Gollanmalary «Pozulan ulanyjy» awtory bilen galar.')) {
         return;
     }
     router.delete(route('admin.users.destroy', id), { preserveScroll: true });
@@ -69,17 +69,17 @@ function removeContributor(id) {
 
 <template>
     <AdminLayout>
-        <Head title="Admin — Users" />
+        <Head title="Administrator — Ulanyjylar" />
 
         <div class="mx-auto max-w-6xl space-y-6 px-4 py-6 md:px-8">
             <div class="flex flex-wrap items-center justify-between gap-3">
-                <h1 class="text-xl font-bold text-gray-900">Contributors</h1>
+                <h1 class="text-xl font-bold text-gray-900">Goşantçylar</h1>
                 <button
                     type="button"
                     class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
                     @click="openModal"
                 >
-                    Add contributor
+                    Goşantçy goş
                 </button>
             </div>
 
@@ -87,11 +87,11 @@ function removeContributor(id) {
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-4 py-3 text-left font-semibold text-gray-700">Name</th>
-                            <th class="px-4 py-3 text-left font-semibold text-gray-700">Email</th>
-                            <th class="px-4 py-3 text-left font-semibold text-gray-700">Guides</th>
-                            <th class="px-4 py-3 text-left font-semibold text-gray-700">Created</th>
-                            <th class="px-4 py-3 text-right font-semibold text-gray-700">Actions</th>
+                            <th class="px-4 py-3 text-left font-semibold text-gray-700">At</th>
+                            <th class="px-4 py-3 text-left font-semibold text-gray-700">E-poçta</th>
+                            <th class="px-4 py-3 text-left font-semibold text-gray-700">Gollanmalar</th>
+                            <th class="px-4 py-3 text-left font-semibold text-gray-700">Döredilen</th>
+                            <th class="px-4 py-3 text-right font-semibold text-gray-700">Hereketler</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
@@ -106,13 +106,13 @@ function removeContributor(id) {
                                     class="text-sm font-semibold text-red-600 hover:text-red-800"
                                     @click="removeContributor(c.id)"
                                 >
-                                    Remove
+                                    Aýyr
                                 </button>
                             </td>
                         </tr>
                         <tr v-if="!contributors.length">
                             <td colspan="5" class="px-4 py-10 text-center text-gray-500">
-                                No contributors yet.
+                                Häzirlikçä goşantçy ýok.
                             </td>
                         </tr>
                     </tbody>
@@ -130,11 +130,11 @@ function removeContributor(id) {
         >
             <div class="w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
                 <h2 id="add-contrib-title" class="text-lg font-bold text-gray-900">
-                    New contributor
+                    Täze goşantçy
                 </h2>
                 <form class="mt-4 space-y-3" @submit.prevent="submitContributor">
                     <div>
-                        <label class="mb-1 block text-xs font-semibold text-gray-600">Name</label>
+                        <label class="mb-1 block text-xs font-semibold text-gray-600">At</label>
                         <input
                             v-model="form.name"
                             type="text"
@@ -146,7 +146,7 @@ function removeContributor(id) {
                         </p>
                     </div>
                     <div>
-                        <label class="mb-1 block text-xs font-semibold text-gray-600">Email</label>
+                        <label class="mb-1 block text-xs font-semibold text-gray-600">E-poçta</label>
                         <input
                             v-model="form.email"
                             type="email"
@@ -159,7 +159,7 @@ function removeContributor(id) {
                         </p>
                     </div>
                     <div>
-                        <label class="mb-1 block text-xs font-semibold text-gray-600">Password</label>
+                        <label class="mb-1 block text-xs font-semibold text-gray-600">Açar söz</label>
                         <input
                             v-model="form.password"
                             type="password"
@@ -173,7 +173,7 @@ function removeContributor(id) {
                     </div>
                     <div>
                         <label class="mb-1 block text-xs font-semibold text-gray-600"
-                            >Confirm password</label
+                            >Açar söz tassyklamasy</label
                         >
                         <input
                             v-model="form.password_confirmation"
@@ -189,14 +189,14 @@ function removeContributor(id) {
                             class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50"
                             @click="closeModal"
                         >
-                            Cancel
+                            Ýatyr
                         </button>
                         <button
                             type="submit"
                             class="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
                             :disabled="form.processing"
                         >
-                            Create
+                            Döret
                         </button>
                     </div>
                 </form>
