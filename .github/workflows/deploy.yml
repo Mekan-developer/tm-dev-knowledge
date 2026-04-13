@@ -3,7 +3,7 @@ name: Deploy to Ubuntu Server
 on:
   push:
     branches:
-      - main  # Оставляем только main, если работаешь в ней
+      - main
 
 jobs:
   deploy:
@@ -23,13 +23,13 @@ jobs:
           tools: composer:v2
 
       - name: Cache composer dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4 # Обновил до v4 для поддержки Node 24
         with:
           path: vendor
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
-      - name: Install dependencies (Local)
+      - name: Install dependencies (Local runner)
         run: composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
 
       - name: Run tests
@@ -45,32 +45,40 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             set -e
+
+            # 1. Решаем проблему "dubious ownership" (Error 128)
+            git config --global --add safe.directory ${{ secrets.PROJECT_PATH }}
+
             cd ${{ secrets.PROJECT_PATH }}
 
-            # 1. Синхронизация кода
-            git clean -fd
-            git fetch origin
+            # 2. Синхронизация кода
+            git fetch origin main
             git reset --hard origin/main
+            git clean -fd
 
-            # 2. Установка зависимостей и сборка фронтенда
+            # 3. Установка зависимостей и фронтенд
+            # (Убедись, что на сервере есть npm и composer)
             composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
             npm install
             npm run build
 
-            # 3. Миграции и права (важно для Laravel)
+            # 4. База данных и права
             php artisan migrate --force
-            chown -R www-data:www-data storage bootstrap/cache
-            chmod -R 775 storage bootstrap/cache
 
-            # 4. Оптимизация кеша Laravel
+            # Используем sudo для chown, так как это системные права
+            sudo chown -R www-data:www-data storage bootstrap/cache
+            sudo chmod -R 775 storage bootstrap/cache
+
+            # 5. Глубокая очистка и прогрев кеша
+            php artisan optimize:clear
             php artisan config:cache
             php artisan route:cache
             php artisan view:cache
 
-            # 5. Перезапуск PHP-FPM
+            # 6. Перезапуск PHP
             sudo systemctl restart php-fpm || true
 
-            echo "✅ Deployment на Ubuntu успешно завершен!"
+            echo "✅ Deployment успешно завершен!"
 
       - name: Notify on success
         if: success()
@@ -78,5 +86,4 @@ jobs:
 
       - name: Notify on failure
         if: failure()
-        run: echo "❌ Развертывание не удалось. Проверьте логи."
-
+        run: echo "❌ Развертывание не удалось. Проверьте логи SSH шага."
