@@ -3,23 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
-use App\Mail\ContactFormMail;
+use App\Services\ContactService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    public function __construct(
+        private ContactService $contactService,
+    ) {}
+
     /**
      * Отправляет письмо с формы контакта на адрес из конфигурации.
      */
     public function send(ContactRequest $request): RedirectResponse
     {
-        if ($request->filled('website')) {
-            return back();
-        }
-
-        Mail::to(config('mail.contact_to'))
-            ->send(new ContactFormMail($request->validated()));
+        $this->contactService->sendContactMessage($request->validated());
 
         return back()->with('contact_success', true);
     }

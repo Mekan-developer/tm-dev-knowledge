@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RedirectIfAuthenticatedFromContributorLogin
 {
     /**
-     * @param  \Closure(Request): Response  $next
+     * @param  Closure(Request): Response  $next
      */
     public function handle(Request $request, Closure $next): Response
     {

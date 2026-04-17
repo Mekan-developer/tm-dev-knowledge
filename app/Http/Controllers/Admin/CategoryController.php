@@ -56,6 +56,7 @@ class CategoryController extends Controller
     {
         try {
             $this->guideCategoryService->deleteCategory($category);
+
             return back()->with('success', 'Категория удалена.');
         } catch (Exception $exception) {
             return back()->with('error', $exception->getMessage());

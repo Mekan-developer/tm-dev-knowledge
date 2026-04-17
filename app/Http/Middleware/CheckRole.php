@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CheckRole
 {
     /**
-     * @param  \Closure(Request): Response  $next
+     * @param  Closure(Request): Response  $next
      * @param  string  $role  Ожидаемое значение роли (например admin).
      */
     public function handle(Request $request, Closure $next, string $role): Response

@@ -1,7 +1,7 @@
 <?php
 
+use App\Enums\UserRole;
 use App\Models\Guide;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -22,7 +22,7 @@ return new class extends Migration
             $name = 'Admin';
             if ($user !== null) {
                 $roleVal = $user->getRawOriginal('role') ?? $user->role;
-                $roleVal = $roleVal instanceof \App\Enums\UserRole ? $roleVal->value : (string) $roleVal;
+                $roleVal = $roleVal instanceof UserRole ? $roleVal->value : (string) $roleVal;
                 $name = $roleVal === 'admin' ? 'Admin' : (string) $user->name;
             }
             $guide->updateQuietly(['author_name' => $name]);

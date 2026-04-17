@@ -4,17 +4,17 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Address;
 
 class ContactFormMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
-     * @param array{name:string,email:string,subject:string,message:string} $payload
+     * @param  array{name:string,email:string,subject:string,message:string}  $payload
      */
     public function __construct(
         public array $payload,

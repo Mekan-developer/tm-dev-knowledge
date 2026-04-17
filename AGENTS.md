@@ -47,6 +47,9 @@ This project has domain-specific skills available. You MUST activate the relevan
 
 - Stick to existing directory structure; don't create new base folders without approval.
 - Do not change the application's dependencies without approval.
+- For this project (Laravel + Inertia, no API), use this backend architecture for new business logic: `route -> controller -> service -> repository -> FormRequest`.
+- Keep controllers thin: move business logic to services and data-access/query logic to repositories.
+- Do not add an API Resource layer unless the user explicitly requests API development.
 
 ## Frontend Bundling
 

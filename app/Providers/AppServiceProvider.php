@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\User;
-use App\Repositories\Contracts\GuideRepositoryInterface;
+use App\Repositories\ContactRepository;
+use App\Repositories\Contracts\ContactRepositoryInterface;
 use App\Repositories\Contracts\GuideCategoryRepositoryInterface;
+use App\Repositories\Contracts\GuideRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use App\Repositories\GuideCategoryRepository;
 use App\Repositories\GuideRepository;
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(ContactRepositoryInterface::class, ContactRepository::class);
         $this->app->bind(GuideRepositoryInterface::class, GuideRepository::class);
         $this->app->bind(GuideCategoryRepositoryInterface::class, GuideCategoryRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
